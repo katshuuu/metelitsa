@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --navy: #030a3c;
+  --white: #ffffff;
+  --mist: #eef1f6;
+  --slate: #56637f;
+  --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --header: 69px;
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --header: 77px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header);
+}
+
+body {
+  background: var(--white);
+  color: var(--navy);
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+h2,
+h3,
+h4,
+b,
+strong,
+button,
+input,
+textarea {
+  font-weight: 400;
+}
+
+:focus {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 16px;
+  top: 12px;
+  z-index: 80;
+  transform: translateY(-160%);
+  background: var(--white);
+  color: var(--navy);
+  padding: 10px 16px;
+}
+
+.skip-link:focus {
+  transform: none;
+}
+
+.link-arrow {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  transition: background-size 280ms var(--ease);
+}
+
+.link-arrow:hover,
+.link-arrow:focus-visible {
+  background-size: 100% 1px;
+}
+
+.measure {
+  max-width: 68ch;
+}
+
+.prose-metelitsa p {
+  max-width: 68ch;
+  margin-bottom: 1rem;
+}
+
+.prose-metelitsa h2 {
+  font-family: var(--font-prata), Georgia, serif;
+  font-size: clamp(24px, 2vw, 30px);
+  line-height: 1.15;
+  margin: 2rem 0 0.75rem;
+}
+
+.prose-metelitsa ul {
+  max-width: 68ch;
+  margin: 0 0 1.25rem;
+  padding-left: 1.1rem;
+}
+
+.prose-metelitsa li {
+  margin: 0.35rem 0;
+}
+
+.partner-band {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  min-height: 94px;
+  overflow: clip;
+}
+
+.marquee-track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 94px;
+  animation: partner-marquee 56s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation-direction: reverse;
+}
+
+.partner-band:hover .marquee-track,
+.partner-band:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes partner-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .partner-band {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .marquee-track,
+  .marquee-track-reverse {
+    animation: none !important;
+    transform: none !important;
+    width: min(1300px, calc(100% - 40px));
+    margin-inline: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.75rem;
+    padding-block: 1rem;
+  }
+
+  .marquee-track > [aria-hidden="true"] {
+    display: none;
+  }
+}
