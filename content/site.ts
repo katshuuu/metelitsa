@@ -45,56 +45,16 @@ export type NavItem = {
   children?: NavChild[];
 };
 
-export const mainNav: NavItem[] = [
-  {
-    label: "Об оркестре",
-    href: "/about",
-    sectionId: "about",
-    children: [
-      { label: "Об оркестре", href: "/about" },
-      { label: "История", href: "/about/history" },
-      { label: "Игорь Тонин", href: "/about/igor-tonin" },
-      { label: "Администрация", href: "/about/administration" },
-      { label: "Состав", href: "/about/composition" },
-      { label: "Документы", href: "/about/documents" },
-      { label: "Закупки", href: "/about/tenders" },
-    ],
-  },
-  {
-    label: "Билеты и абонементы",
-    href: "/tickets",
-    sectionId: "tickets",
-    children: [
-      { label: "Афиша", href: "/tickets" },
-      { label: "Пушкинская карта", href: "/pushkin" },
-      { label: "Школьный абонемент", href: "/schools/subscription" },
-    ],
-  },
-  {
-    label: "Школам и организациям",
-    href: "/schools",
-    sectionId: "schools",
-    children: [
-      { label: "Школам и организациям", href: "/schools" },
-      { label: "Школьный абонемент", href: "/schools/subscription" },
-      { label: "Творческая школа", href: "/schools/creative-school" },
-      { label: "Сотрудничество", href: "/schools/cooperation" },
-      { label: "Детские конкурсы", href: "/competitions" },
-    ],
-  },
-  {
-    label: "Медиа",
-    href: "/media",
-    sectionId: "media",
-    children: [
-      { label: "Медиа", href: "/media" },
-      { label: "Фото", href: "/media/photo" },
-      { label: "Видео", href: "/media/video" },
-      { label: "Дискография", href: "/media/discography" },
-      { label: "Новости", href: "/news" },
-    ],
-  },
-  { label: "Контакты", href: "/contacts", sectionId: "contacts" },
+/** Пункты шапки из кадров 1440: плоское меню и кнопка «Афиша». */
+export const headerNav: NavItem[] = [
+  { label: "Об оркестре", href: "/about" },
+  { label: "Новости", href: "/news" },
+  { label: "Медиа", href: "/media" },
+  { label: "Программы", href: "/programs" },
+  { label: "Пушкинская карта", href: "/pushkin" },
+  { label: "Детские конкурсы", href: "/competitions" },
+  { label: "Фестивали", href: "/festivals" },
+  { label: "Контакты", href: "/contacts" },
 ];
 
 export const footerNav = [

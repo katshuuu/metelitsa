@@ -1,36 +1,41 @@
-import Link from "next/link";
 import { Container } from "@/components/ui/Container";
+import { LinkCards, SectionIntro } from "@/components/layout/PageFrame";
 
 const cards = [
   {
-    href: "/pushkin",
-    title: "Пушкинская карта",
-    text: "Билеты на концерты для молодёжи от 14 до 22 лет.",
-  },
-  {
+    n: "01",
     href: "/schools/subscription",
     title: "Школьный абонемент",
-    text: "Цикл концертов для школьников и классов.",
+    text: "Интерактивные концерты-путешествия «Волшебный мир народной музыки».",
+    action: "Подробнее",
   },
   {
+    n: "02",
     href: "/schools/creative-school",
     title: "Творческая школа",
-    text: "Образовательная программа оркестра для детей и подростков.",
+    text: "Мастер-классы Игоря Тонина и солистов оркестра для детей и юношества.",
+    action: "Подробнее",
+  },
+  {
+    n: "03",
+    href: "/schools/cooperation",
+    title: "Сотрудничество",
+    text: "Концерты к праздникам, на городских площадках и в благотворительных проектах.",
+    action: "Подробнее",
   },
 ];
 
 export function Programs() {
   return (
-    <section className="bg-white pb-20 text-navy md:pb-28">
+    <section id="schools" className="scroll-mt-24 bg-mist py-16 text-navy md:py-24">
       <Container>
-        <div className="grid gap-4 md:grid-cols-3">
-          {cards.map((card) => (
-            <Link key={card.href} href={card.href} className="group border border-navy/15 bg-mist p-6 transition-colors duration-300 hover:border-navy">
-              <h3 className="font-display text-[26px] leading-tight">{card.title}</h3>
-              <p className="mt-3 max-w-[28ch] text-[15px] leading-relaxed text-slate">{card.text}</p>
-              <span className="link-arrow mt-6 inline-flex min-h-11 items-center text-[15px]">Подробнее →</span>
-            </Link>
-          ))}
+        <SectionIntro
+          kicker="Программы"
+          title="Оркестр — не только на сцене"
+          text="Просветительские проекты, школы и партнёрские программы для детей, школ и организаций."
+        />
+        <div className="mt-12">
+          <LinkCards items={cards} />
         </div>
       </Container>
     </section>

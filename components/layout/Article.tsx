@@ -1,27 +1,32 @@
+import { PageHero, SectionTabs, type Crumb } from "@/components/layout/PageFrame";
 import { Container } from "@/components/ui/Container";
-import { SectionLabel } from "@/components/ui/SectionLabel";
 
 export function Article({
-  eyebrow,
   title,
   lede,
+  kicker,
+  eyebrow,
+  crumbs,
+  tabs,
   children,
 }: {
-  eyebrow: string;
   title: string;
   lede?: string;
-  children: React.ReactNode;
+  kicker?: string;
+  eyebrow?: string;
+  crumbs?: Crumb[];
+  tabs?: { href: string; label: string }[];
+  children?: React.ReactNode;
 }) {
+  const trail = crumbs ?? [
+    { label: "Главная", href: "/" },
+    { label: title },
+  ];
   return (
     <article>
-      <header className="bg-navy text-white">
-        <Container className="pb-14 pt-32 md:pb-16">
-          <SectionLabel light>{eyebrow}</SectionLabel>
-          <h1 className="mt-4 max-w-[16ch] font-display text-h1">{title}</h1>
-          {lede ? <p className="measure mt-6 text-[18px] leading-[1.55] text-white/80">{lede}</p> : null}
-        </Container>
-      </header>
-      <Container className="prose-metelitsa py-16 md:py-20">{children}</Container>
+      <PageHero crumbs={trail} kicker={kicker ?? eyebrow ?? "Метелица"} title={title} lede={lede} />
+      {tabs ? <SectionTabs items={tabs} /> : null}
+      {children ? <Container className="py-16 md:py-20">{children}</Container> : null}
     </article>
   );
 }

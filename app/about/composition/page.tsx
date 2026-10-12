@@ -1,21 +1,23 @@
-import { Article } from "@/components/layout/Article";
-import { ensemble } from "@/content/people";
+import { Frame, PageHero, SectionTabs } from "@/components/layout/PageFrame";
+import { EnsembleBoard } from "@/components/sections/EnsembleBoard";
+import { aboutTabs, homeCrumbs } from "@/content/nav";
 import { pageMeta } from "@/lib/seo";
 
-export const metadata = pageMeta("Состав", "Состав Государственного оркестра «Метелица».", "/about/composition");
+export const metadata = pageMeta("Состав оркестра", "Музыканты оркестра «Метелица».", "/about/composition");
 
 export default function CompositionPage() {
   return (
-    <Article eyebrow="Об оркестре" title="Состав">
-      {ensemble.map((group) => (
-        <section key={group.title} className="mb-8">
-          <h2>{group.title}</h2>
-          <p>{group.people.join(", ")}</p>
-        </section>
-      ))}
-      <p className="text-[14px] text-slate">
-        TODO: написание «Викториия Тубакова» сохранено так, как оно опубликовано на исходном сайте.
-      </p>
-    </Article>
+    <>
+      <PageHero
+        crumbs={[...homeCrumbs, { label: "Об оркестре", href: "/about" }, { label: "Состав" }]}
+        kicker="Об оркестре"
+        title="Состав оркестра"
+        lede="30 музыкантов: дирижёры, балалайки, домры, баяны, гусли и другие инструменты."
+      />
+      <SectionTabs items={aboutTabs} />
+      <Frame>
+        <EnsembleBoard />
+      </Frame>
+    </>
   );
 }

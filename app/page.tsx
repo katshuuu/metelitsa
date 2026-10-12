@@ -5,18 +5,18 @@ import { MediaBand } from "@/components/sections/MediaBand";
 import { Partners } from "@/components/sections/Partners";
 import { Programs } from "@/components/sections/Programs";
 import { Schools } from "@/components/sections/Schools";
-import { Tickets } from "@/components/sections/Tickets";
+import { HomeEvents } from "@/components/sections/HomeEvents";
 
 export default function HomePage() {
   return (
     <>
       <Hero />
       <Facts />
-      <Tickets />
       <Programs />
       <AboutBand />
-      <Schools />
+      <HomeEvents />
       <MediaBand />
+      <Schools />
       <Partners />
     </>
   );

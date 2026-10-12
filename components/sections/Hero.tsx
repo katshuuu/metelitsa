@@ -2,12 +2,11 @@
 
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { nearestEvent } from "@/content/events";
+import { getEvent, nearestEvent } from "@/content/events";
 import { formatMonthYear } from "@/lib/dates";
 import { usePrefersReducedMotion } from "@/lib/use-reduced-motion";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
-import { VideoModal } from "@/components/media/VideoModal";
 
 function dayLabel(event: ReturnType<typeof nearestEvent>) {
   const start = Number(event.start.slice(8, 10));
@@ -17,10 +16,9 @@ function dayLabel(event: ReturnType<typeof nearestEvent>) {
 }
 
 export function Hero() {
-  const event = nearestEvent();
+  const event = getEvent("v-ritme-vremeni") ?? nearestEvent();
   const reduced = usePrefersReducedMotion();
   const [shift, setShift] = useState({ x: 0, y: 0 });
-  const [video, setVideo] = useState(false);
 
   useEffect(() => {
     if (reduced) return;
@@ -108,32 +106,30 @@ export function Hero() {
             <p className="text-[12px] uppercase tracking-[0.16em] text-white/70">
               Государственный оркестр русских народных инструментов
             </p>
-            <p className="measure mt-5 text-[18px] leading-[1.55] text-white/90">
-              Каждый музыкант оркестра — солист-виртуоз, большинство — лауреаты международных и всероссийских конкурсов. В концертных программах звучат русская и зарубежная классика, народная музыка и сочинения современных авторов.
+            <p className="measure mt-5 text-[17px] leading-[1.45] text-white/90 md:text-[20px]">
+              Каждый музыкант оркестра — лауреат международных и всероссийских конкурсов. В программах русская и зарубежная классика, народная музыка и сочинения современных авторов.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Button href="/#tickets" tone="onDark">
+              <Button href="/news" tone="onDark">
                 Афиша и билеты
               </Button>
-              <Button tone="onDark" variant="outline" onClick={() => setVideo(true)}>
-                Смотреть видео
+              <Button href="/media/publications" tone="onDark" variant="outline">
+                СМИ о нас
               </Button>
             </div>
           </div>
-          <article className="bg-white p-6 text-navy sm:p-8 lg:col-span-5">
-            <p className="font-display leading-none" style={{ fontSize: "clamp(64px, 8vw, 112px)" }}>
-              {dayLabel(event)}
-            </p>
+          <article className="bg-white p-8 text-navy lg:col-span-5 lg:-mt-16">
+            <p className="text-[12px] uppercase tracking-[0.16em] text-slate">Анонс</p>
+            <p className="mt-2 font-display text-[64px] leading-none 2xl:text-[96px]">{dayLabel(event)}</p>
             <p className="mt-2 text-[14px] text-slate">{formatMonthYear(event.start)}</p>
             <h2 className="mt-6 font-display text-h3">{event.title}</h2>
-            <p className="mt-2 text-[15px] text-slate">{event.venue ?? event.city}</p>
+            <p className="mt-2 text-[15px] text-slate">{(event.venue ?? event.city).split(",")[0]}</p>
             <Button href={`/tickets/${event.slug}`} tone="onLight" className="mt-8 w-full">
-              Подробнее и билеты
+              Подробнее
             </Button>
           </article>
         </div>
       </Container>
-      <VideoModal open={video} onClose={() => setVideo(false)} />
     </section>
   );
 }

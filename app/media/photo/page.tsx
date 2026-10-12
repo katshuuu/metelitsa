@@ -1,20 +1,24 @@
+import { CtaBand, PageHero, SectionTabs } from "@/components/layout/PageFrame";
 import { PhotoGrid } from "@/components/sections/PhotoGrid";
+import { homeCrumbs, mediaTabs } from "@/content/nav";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata = pageMeta("Фотогалерея", "Концерты и гастроли оркестра «Метелица».", "/media/photo");
 
 export default function PhotoPage() {
   return (
-    <article>
-      <header className="bg-navy text-white">
-        <div className="mx-auto w-[min(1300px,calc(100%-40px))] pb-14 pt-32 md:w-[min(1300px,calc(100%-64px))]">
-          <p className="text-[12px] uppercase tracking-[0.16em] text-white/70">Медиа</p>
-          <h1 className="mt-4 font-display text-h1">Фотогалерея</h1>
-        </div>
-      </header>
-      <div className="mx-auto w-[min(1300px,calc(100%-40px))] py-16 md:w-[min(1300px,calc(100%-64px))]">
+    <>
+      <PageHero
+        crumbs={[...homeCrumbs, { label: "Медиа", href: "/media" }, { label: "Фото" }]}
+        kicker="Медиа"
+        title="Фотогалерея"
+        lede="Концерты, репетиции и гастроли. Нажмите на фотографию, чтобы открыть её крупно; листайте стрелками или свайпом."
+      />
+      <SectionTabs items={mediaTabs} />
+      <div className="mx-auto w-[min(1300px,calc(100%-40px))] py-16 md:w-[min(1300px,calc(100%-64px))] md:py-20">
         <PhotoGrid />
       </div>
-    </article>
+      <CtaBand title="Больше — в видео и на концертах" links={[{ href: "/media/video", label: "Видео на RuTube" }, { href: "/news", label: "Анонсы" }]} />
+    </>
   );
 }

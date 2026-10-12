@@ -8,7 +8,13 @@
   --mist: #eef1f6;
   --slate: #56637f;
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
-  --header: 96px;
+  --header: 69px;
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --header: 77px;
+  }
 }
 
 html {
@@ -99,15 +105,18 @@ textarea {
 }
 
 .partner-band {
-  display: flex;
-  align-items: center;
+  display: block;
+  width: 100%;
+  max-width: 100%;
   min-height: 94px;
-  overflow-x: clip;
+  overflow: clip;
 }
 
 .marquee-track {
   display: flex;
+  align-items: center;
   width: max-content;
+  height: 94px;
   animation: partner-marquee 56s linear infinite;
 }
 

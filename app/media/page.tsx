@@ -5,8 +5,8 @@ export const metadata = pageMeta("Медиа", "Видео, фотографии
 
 export default function MediaPage() {
   return (
-    <div className="pt-20">
-      <MediaBand />
+    <div className="pt-16">
+      <MediaBand titleAs="h1" />
     </div>
   );
 }
