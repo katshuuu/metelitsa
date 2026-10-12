@@ -57,30 +57,53 @@ export function Hero() {
           style={move(0.9)}
         />
         <h1
-          className="relative z-20 -mb-6 text-center font-display leading-[0.86] text-white sm:-mb-12"
+          className="relative z-30 -mb-[0.28em] text-center font-display leading-[0.86] text-white"
           style={{ fontSize: "clamp(56px, 12vw, 168px)" }}
         >
           Метелица
         </h1>
 
-        <div className="relative z-10 mx-auto mt-2 max-w-[860px] sm:-mt-2" style={move(0.25)}>
-          <div className="border border-white p-2 sm:p-3">
-            <div className="border border-white/55">
-            <div className="relative aspect-[16/10] overflow-hidden bg-navy">
+        <div className="relative z-10 mx-auto mb-[12%] max-w-[860px] sm:mb-[11%]" style={move(0.2)}>
+          <div className="relative aspect-[949/658]">
+            <div
+              className="absolute overflow-hidden"
+              style={{ left: "8.75%", top: "11.55%", width: "81.14%", height: "77.05%" }}
+            >
               <Image
                 src="/images/gallery-hall.webp"
                 alt="Оркестр «Метелица» на сцене парадного зала"
                 fill
                 priority
-                sizes="(max-width: 768px) 100vw, 860px"
-                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 700px"
+                className="object-cover object-[center_40%]"
               />
             </div>
-            </div>
+            <Image
+              src="/images/frame.png"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 860px"
+              className="pointer-events-none z-10 object-fill"
+            />
           </div>
+          <Image
+            src="/images/soloist.png"
+            alt="Солистка оркестра «Метелица»"
+            width={681}
+            height={608}
+            priority
+            sizes="(max-width: 768px) 70vw, 520px"
+            className="pointer-events-none absolute z-20 h-auto w-[64%] max-w-none"
+            style={{
+              left: "23%",
+              top: "33%",
+              ...(reduced ? {} : { transform: `translate3d(${shift.x * 0.45}px, ${shift.y * 0.45}px, 0)` }),
+            }}
+          />
         </div>
 
-        <div className="relative z-20 mt-12 grid items-end gap-10 lg:grid-cols-12">
+        <div className="relative z-20 mt-8 grid items-start gap-10 lg:grid-cols-12">
           <div className="lg:col-span-7">
             <p className="text-[12px] uppercase tracking-[0.16em] text-white/70">
               Государственный оркестр русских народных инструментов

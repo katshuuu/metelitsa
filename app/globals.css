@@ -98,6 +98,37 @@ textarea {
   margin: 0.35rem 0;
 }
 
+.partner-band {
+  display: flex;
+  align-items: center;
+  min-height: 94px;
+  overflow-x: clip;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: partner-marquee 56s linear infinite;
+}
+
+.marquee-track-reverse {
+  animation-direction: reverse;
+}
+
+.partner-band:hover .marquee-track,
+.partner-band:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes partner-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -110,5 +141,27 @@ textarea {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .partner-band {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+  }
+
+  .marquee-track,
+  .marquee-track-reverse {
+    animation: none !important;
+    transform: none !important;
+    width: min(1300px, calc(100% - 40px));
+    margin-inline: auto;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.75rem;
+    padding-block: 1rem;
+  }
+
+  .marquee-track > [aria-hidden="true"] {
+    display: none;
   }
 }

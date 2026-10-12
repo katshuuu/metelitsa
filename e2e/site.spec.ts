@@ -6,6 +6,9 @@ test("homepage exposes the orchestra name and sections", async ({ page }) => {
   await expect(page.getByRole("link", { name: "Перейти к содержимому" })).toBeAttached();
   await expect(page.getByRole("heading", { name: "Ближайшие концерты" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Нужно уметь объединить сердца" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Наши партнеры" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Культура.РФ" })).toBeVisible();
+  await expect(page.getByRole("img", { name: "Солистка оркестра «Метелица»" })).toBeVisible();
 });
 
 test("mobile menu opens and closes with Escape", async ({ page }) => {
