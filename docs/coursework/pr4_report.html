@@ -1,0 +1,656 @@
+<!doctype html><html lang='ru'><head><meta charset='utf-8'><style>
+@page { size: A4; margin: 20mm 18mm 18mm 25mm; }
+* { box-sizing: border-box; }
+body { font-family: "Liberation Serif","DejaVu Serif",serif; font-size: 13.5pt; line-height: 1.5;
+       color:#111; margin:0; text-align: justify; hyphens: auto; }
+h1,h2,h3 { font-weight:700; text-align:left; line-height:1.25; }
+h2 { font-size:15pt; margin:18pt 0 8pt; }
+h3 { font-size:13.5pt; margin:14pt 0 6pt; }
+p { margin:0 0 8pt; }
+ul,ol { margin:0 0 8pt; padding-left: 20pt; }
+li { margin:2pt 0; }
+figure { margin:12pt 0 14pt; page-break-inside: avoid; text-align:center; }
+.figbox { border:1px solid #d7d7d7; padding:6px; background:#fff; }
+figcaption { font-size:12pt; margin-top:6pt; text-align:center; }
+table { border-collapse: collapse; width:100%; font-size:11.5pt; margin:6pt 0 12pt; page-break-inside: avoid; }
+th,td { border:1px solid #9a9a9a; padding:5pt 7pt; vertical-align:top; text-align:left; line-height:1.35; }
+th { background:#eee; font-weight:700; }
+.tcap { font-size:12pt; margin:10pt 0 2pt; }
+.title-page { height: 257mm; display:flex; flex-direction:column; text-align:center; page-break-after: always; }
+.tp-top { font-size:12.5pt; line-height:1.4; }
+.tp-mid { flex:1; display:flex; flex-direction:column; justify-content:center; gap:4pt; }
+.tp-report { font-size:20pt; font-weight:700; letter-spacing:2pt; margin-top:8pt; }
+.tp-sub { font-size:14.5pt; }
+.tp-disc { font-size:13pt; margin-top:6pt; }
+.tp-right { text-align:right; font-size:13pt; margin-top:26pt; }
+.tp-bottom { font-size:13pt; margin-top:auto; }
+.center { text-align:center; }
+.note { font-size:11.5pt; color:#333; }
+</style></head><body>
+<section class="title-page">
+  <div class="tp-top">
+    МИНОБРНАУКИ РОССИИ<br>
+    Федеральное государственное бюджетное образовательное учреждение высшего образования<br>
+    «МИРЭА – Российский технологический университет»<br>
+    РТУ МИРЭА<br><br>
+    Институт перспективных технологий и индустриального программирования<br>
+    Кафедра индустриального программирования
+  </div>
+  <div class="tp-mid">
+    <div class="tp-report">ОТЧЁТ</div>
+    <div class="tp-sub">по практическому заданию № 4</div>
+    <div class="tp-sub">«Вайрфрейм остальных блоков»</div>
+    <div class="tp-disc">по дисциплине «Компьютерный дизайн»</div>
+    <br>
+    <div class="tp-disc">НАПРАВЛЕНИЕ ПОДГОТОВКИ<br>09.03.02 «Информационные системы и технологии»</div>
+    <div class="tp-right">
+      Выполнила:<br>
+      Студентка группы ЭФБО-01-24<br>
+      Шусталова Е.М.
+    </div>
+  </div>
+  <div class="tp-bottom">Москва 2026</div>
+</section><h1 style='font-size:16pt;text-align:center'>Практическая работа 4<br>«Вайрфрейм остальных блоков»</h1><h2>1. Цель работы</h2><p>Разработать вайрфреймы остальных блоков одностраничного лендинга Государственного
+оркестра русских народных инструментов «Метелица» и макеты всплывающих окон, применив
+принципы гештальт-композиции для группировки и визуальной иерархии элементов. Работа
+продолжает практическую работу 3, в которой построена информационная архитектура лендинга
+и выполнен вайрфрейм первого блока (шапка, первый экран-постер, интро с ближайшим концертом
+и факты).</p><h2>2. Исходные данные</h2><p>В основе работы — реализованный в Figma макет лендинга и информационная архитектура из
+практической работы 3: одностраничный сайт из восьми последовательных блоков. Первый блок
+(блоки 1–3 архитектуры: шапка, первый экран, интро и факты) уже спроектирован. В настоящей
+работе проектируются оставшиеся блоки и все всплывающие окна:</p><ul>
+<li>блок 4 — «Билеты и абонементы»: список ближайших концертов и карточки продуктов;</li>
+<li>блок 5 — «Об оркестре»: доверие к коллективу, цитата художественного руководителя;</li>
+<li>блок 6 — «Школам и организациям»: второе целевое действие — форма заявки;</li>
+<li>блок 7 — «Медиа»: фото и ссылки на галерею, видео, дискографию;</li>
+<li>блок 8 — подвал (контакты): обязательная информация госучреждения;</li>
+<li>семь всплывающих окон, которые открываются из элементов блоков.</li>
+</ul><p>Вместе с первым блоком лендинг состоит из восьми блоков (больше требуемых пяти). Параметры
+фрейма и модульной сетки сохранены из практической работы 3 (таблица 1): фрейм 1920 px, 12 колонок,
+контентная область 1300 px, gutter 24 px, поля 310 px. Цвет макета заменён оттенками серого
+(#262626 – #F4F4F4): фирменный тёмно-синий #030A3C показан тёмно-серым, белый и mist —
+светло-серыми тонами. Фотографии обозначены прямоугольниками с крестом, эмблема и орнамент —
+простыми фигурами, шрифт вайрфрейма — Inter; тексты перенесены из реализованного макета.</p><div class="tcap">Таблица 1 – Параметры фрейма и сетки</div><table>
+<tr><th>Параметр</th><th>Значение</th><th>Требование задания</th></tr>
+<tr><td>Ширина фрейма</td><td>1920 px (реализованный макет — 1440 px)</td><td>1920 px</td></tr>
+<tr><td>Сетка (Layout grid)</td><td>12 колонок, Stretch, Margin 310, Gutter 24 (колонка ≈ 86 px)</td><td>12 колонок</td></tr>
+<tr><td>Контентная область</td><td>1300 px</td><td>≈ 1300 px</td></tr>
+<tr><td>Gutter</td><td>24 px</td><td>20–30 px</td></tr>
+<tr><td>Высота всего лендинга</td><td>≈ 5300 px (восемь блоков)</td><td>корректируется</td></tr>
+<tr><td>Цвет</td><td>Только оттенки серого (#262626 – #F4F4F4)</td><td>Серый макет</td></tr>
+<tr><td>Графика</td><td>Прямоугольники с крестом — фото; простые фигуры — эмблема и орнамент</td><td>Геометрические фигуры</td></tr>
+<tr><td>Шрифт</td><td>Inter — нейтральный шрифт вайрфрейма</td><td>—</td></tr>
+</table><figure><div class="figbox" ><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="1920" height="360" viewBox="0 0 1920 360"><rect x="0.0" y="0.0" width="1920.0" height="360.0" fill="#ededed" stroke="#c4c4c4" stroke-width="1"/>
+<rect x="0.0" y="0.0" width="1920.0" height="120.0" fill="#3c3c3c"/>
+<text x="310.0" y="70.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="20" font-weight="400" fill="#e0e0e0" text-anchor="start">header 120 px</text>
+<rect x="0.0" y="120.0" width="310.0" height="240.0" fill="#dadada"/>
+<rect x="1610.0" y="120.0" width="310.0" height="240.0" fill="#dadada"/>
+<text x="155.0" y="250.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#6f6f6f" text-anchor="middle">поле
+310</text>
+<text x="1765.0" y="250.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#6f6f6f" text-anchor="middle">поле
+310</text>
+<rect x="310.0" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="420.3" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="530.7" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="641.0" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="751.3" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="861.7" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="972.0" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="1082.3" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="1192.7" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="1303.0" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="1413.3" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="1523.7" y="160.0" width="86.3" height="150.0" fill="#cfcfcf" stroke="#b5b5b5" stroke-width="1"/>
+<text x="310.0" y="340.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#555" text-anchor="start">12 колонок · контентная область 1300 px · gutter 24 px · колонка ≈ 86 px</text>
+<text x="960.0" y="150.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#555" text-anchor="middle">1920 px</text></svg></div><figcaption>Рисунок 1 – Параметры фрейма: сетка 12 колонок, поля, gutter, высота header</figcaption></figure><h2>3. Принципы гештальт-композиции</h2><p>Гештальт-принципы описывают, как человек воспринимает группу визуальных элементов как единое
+целое. При проектировании оставшихся блоков использованы следующие принципы, применимые к
+интерфейсам.</p><ul>
+<li><b>Близость.</b> Элементы, расположенные рядом, воспринимаются как группа. Белое пространство
+отделяет группы друг от друга и задаёт направление взгляда.</li>
+<li><b>Общая область.</b> Элементы в пределах одной области (карточки, формы) воспринимаются связанными;
+граница или фон отделяют одну группу от другой и создают точку фокусировки.</li>
+<li><b>Схожесть.</b> Элементы с одинаковым оформлением (карточки, кнопки, ссылки со стрелкой)
+воспринимаются как однотипные; «аномалия» — залитая кнопка — выделяет целевое действие.</li>
+<li><b>Замкнутость.</b> Мозг достраивает незавершённые фигуры: обрезанная вырезка солистки и лента
+миниатюр в галерее читаются как целое, хотя показаны не полностью.</li>
+<li><b>Симметрия.</b> Симметричные сетки карточек и колонок подвала создают ощущение порядка;
+единичный асимметричный акцент (кнопка) привлекает внимание.</li>
+<li><b>Продолжение.</b> Выравнивание элементов по колонкам и строкам ведёт взгляд сверху вниз;
+прерывание линии — сигнал о переходе к следующему блоку.</li>
+<li><b>Общая судьба.</b> Одинаково оформленные и синхронно меняющиеся элементы (счётчики билетов,
+аккордеон, лайтбокс) воспринимаются связанными — это заложено в поведение всплывающих окон.</li>
+</ul><h2>4. Вайрфреймы остальных блоков</h2><p>Все блоки выполнены в единой сетке и тональной системе. Расстояния подчинены системе из трёх
+величин (как в практической работе 3): внутри группы — около 36 px, между группами — около 48 px,
+между частями блока — 96–160 px. Благодаря этому элементы читаются группами (принцип близости), а
+смена тона фона отделяет блоки друг от друга (общая область, продолжение).</p><figure><div class="figbox" style="max-width:78mm;margin:0 auto;"><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="1920" height="5302" viewBox="0 0 1920 5302"><rect x="0.0" y="0.0" width="1920.0" height="120.0" fill="#3c3c3c"/>
+<line x1="0.0" y1="120.0" x2="1920.0" y2="120.0" stroke="#5a5a5a" stroke-width="1"/>
+<rect x="310.0" y="44.0" width="120.0" height="34.0" fill="none" stroke="#9a9a9a" stroke-width="1"/>
+<text x="370.0" y="66.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#d8d8d8" text-anchor="middle">ЛОГО</text>
+<text x="780.0" y="66.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#dcdcdc" text-anchor="start">Об оркестре</text>
+<text x="902.0" y="66.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#dcdcdc" text-anchor="start">Билеты и абонементы</text>
+<text x="1088.0" y="66.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#dcdcdc" text-anchor="start">Школам и организациям</text>
+<text x="1290.0" y="66.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#dcdcdc" text-anchor="start">Медиа</text>
+<text x="1364.0" y="66.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#dcdcdc" text-anchor="start">Контакты</text>
+<rect x="1460.0" y="38.0" width="150.0" height="46.0" fill="#ededed"/>
+<text x="1535.0" y="66.4" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#2e2e2e" text-anchor="middle">Купить билет</text>
+<rect x="0.0" y="120.0" width="1920.0" height="680.0" fill="#3c3c3c"/>
+<rect x="150.0" y="270.0" width="80.0" height="150.0" fill="none" stroke="#565656" stroke-width="1"/>
+<line x1="190.0" y1="270.0" x2="190.0" y2="420.0" stroke="#565656" stroke-width="1"/>
+<rect x="1690.0" y="270.0" width="80.0" height="150.0" fill="none" stroke="#565656" stroke-width="1"/>
+<line x1="1730.0" y1="270.0" x2="1730.0" y2="420.0" stroke="#565656" stroke-width="1"/>
+<text x="960.0" y="270.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="96" font-weight="400" fill="#e9e9e9" text-anchor="middle">Метелица</text>
+<rect x="532.0" y="300.0" width="856.0" height="420.0" fill="none" stroke="#707070" stroke-width="6"/>
+<rect x="550.0" y="318.0" width="820.0" height="384.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="550.0" y1="318.0" x2="1370.0" y2="702.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="1370.0" y1="318.0" x2="550.0" y2="702.0" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="850.0" y="480.0" width="220.0" height="340.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="850.0" y1="480.0" x2="1070.0" y2="820.0" stroke="#8f8f8f" stroke-width="1"/>
+<text x="960.0" y="760.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#5c5c5c" text-anchor="middle">фото солистки</text>
+<rect x="0.0" y="800.0" width="1920.0" height="720.0" fill="#3c3c3c"/>
+<line x1="310.0" y1="801.0" x2="1610.0" y2="801.0" stroke="#5a5a5a" stroke-width="1"/>
+<text x="310.0" y="860.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#9d9d9d" text-anchor="start" letter-spacing="2">ГОСУДАРСТВЕННЫЙ ОРКЕСТР РУССКИХ НАРОДНЫХ ИНСТРУМЕНТОВ</text>
+<rect x="310.0" y="892.0" width="638.0" height="9.0" fill="#9b9b9b"/>
+<rect x="310.0" y="915.0" width="638.0" height="9.0" fill="#9b9b9b"/>
+<rect x="310.0" y="938.0" width="638.0" height="9.0" fill="#9b9b9b"/>
+<rect x="310.0" y="961.0" width="382.8" height="9.0" fill="#9b9b9b"/>
+<rect x="310.0" y="1012.0" width="190.0" height="48.0" fill="#ededed"/>
+<text x="405.0" y="1041.4" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#2e2e2e" text-anchor="middle">Афиша и билеты</text>
+<rect x="520.0" y="1012.0" width="165.0" height="48.0" fill="none" stroke="#8c8c8c" stroke-width="1"/>
+<text x="602.5" y="1041.4" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="middle">Смотреть видео</text>
+<rect x="1192.7" y="820.0" width="417.3" height="360.0" fill="#fafafa" stroke="#b5b5b5" stroke-width="1"/>
+<text x="1224.7" y="870.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">АНОНС</text>
+<text x="1224.7" y="950.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="84" font-weight="400" fill="#3a3a3a" text-anchor="start">11</text>
+<text x="1224.7" y="982.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">октября 2026</text>
+<text x="1224.7" y="1032.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="24" font-weight="400" fill="#3a3a3a" text-anchor="start">В ритме времени</text>
+<text x="1224.7" y="1062.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">Яани Кирик</text>
+<rect x="1224.7" y="1096.0" width="353.3" height="48.0" fill="#2e2e2e"/>
+<text x="1401.3" y="1125.4" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#f2f2f2" text-anchor="middle">Подробнее и билеты</text>
+<line x1="310.0" y1="1240.0" x2="1610.0" y2="1240.0" stroke="#5a5a5a" stroke-width="1"/>
+<line x1="310.0" y1="1270.0" x2="727.3" y2="1270.0" stroke="#6a6a6a" stroke-width="1"/>
+<text x="310.0" y="1340.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="40" font-weight="400" fill="#e4e4e4" text-anchor="start">37 лет</text>
+<rect x="310.0" y="1370.0" width="417.3" height="7.0" fill="#8f8f8f"/>
+<rect x="310.0" y="1388.0" width="250.4" height="7.0" fill="#8f8f8f"/>
+<line x1="751.3" y1="1270.0" x2="1168.7" y2="1270.0" stroke="#6a6a6a" stroke-width="1"/>
+<text x="751.3" y="1340.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="40" font-weight="400" fill="#e4e4e4" text-anchor="start">Оркестр солистов</text>
+<rect x="751.3" y="1370.0" width="417.3" height="7.0" fill="#8f8f8f"/>
+<rect x="751.3" y="1388.0" width="250.4" height="7.0" fill="#8f8f8f"/>
+<line x1="1192.7" y1="1270.0" x2="1610.0" y2="1270.0" stroke="#6a6a6a" stroke-width="1"/>
+<text x="1192.7" y="1340.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="40" font-weight="400" fill="#e4e4e4" text-anchor="start">Пушкинская карта</text>
+<rect x="1192.7" y="1370.0" width="417.3" height="7.0" fill="#8f8f8f"/>
+<rect x="1192.7" y="1388.0" width="250.4" height="7.0" fill="#8f8f8f"/>
+<rect x="0.0" y="1520.0" width="1920.0" height="1102.0" fill="#e4e4e4"/>
+<text x="310.0" y="1590.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">БИЛЕТЫ И АБОНЕМЕНТЫ</text>
+<text x="310.0" y="1648.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#3a3a3a" text-anchor="start">Ближайшие концерты</text>
+<line x1="310.0" y1="1690.0" x2="1610.0" y2="1690.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="1754.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="44" font-weight="400" fill="#3a3a3a" text-anchor="start">11</text>
+<text x="310.0" y="1784.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">октября 2026</text>
+<text x="530.7" y="1734.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="11" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="1.4">КОНЦЕРТ</text>
+<text x="530.7" y="1766.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">«В ритме времени»</text>
+<text x="1192.7" y="1756.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="start">Яани Кирик</text>
+<text x="1610.0" y="1756.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">→</text>
+<line x1="310.0" y1="1808.0" x2="1610.0" y2="1808.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="1872.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="44" font-weight="400" fill="#3a3a3a" text-anchor="start">12</text>
+<text x="310.0" y="1902.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">апреля 2026</text>
+<text x="530.7" y="1852.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="11" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="1.4">ФЕСТИВАЛЬ</text>
+<text x="530.7" y="1884.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">«Гуслей серебристый перезвон»</text>
+<text x="1192.7" y="1874.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="start">Капелла Санкт-Петербурга</text>
+<text x="1610.0" y="1874.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">→</text>
+<line x1="310.0" y1="1926.0" x2="1610.0" y2="1926.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="1990.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="44" font-weight="400" fill="#3a3a3a" text-anchor="start">8</text>
+<text x="310.0" y="2020.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">июня</text>
+<text x="530.7" y="1970.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="11" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="1.4">КОНЦЕРТ</text>
+<text x="530.7" y="2002.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">Ко Дню семьи, любви и верности</text>
+<text x="1192.7" y="1992.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="start">Ленинградская область</text>
+<text x="1610.0" y="1992.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">→</text>
+<line x1="310.0" y1="2044.0" x2="1610.0" y2="2044.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="2108.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="44" font-weight="400" fill="#3a3a3a" text-anchor="start">28</text>
+<text x="310.0" y="2138.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">декабря</text>
+<text x="530.7" y="2088.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="11" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="1.4">КОНЦЕРТ</text>
+<text x="530.7" y="2120.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">Новогодний «Киносерпантин»</text>
+<text x="1192.7" y="2110.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="start">Капелла Санкт-Петербурга</text>
+<text x="1610.0" y="2110.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">→</text>
+<line x1="310.0" y1="2162.0" x2="1610.0" y2="2162.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="2212.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Весь архив афиши</text>
+<line x1="310.0" y1="2219.0" x2="434.8" y2="2219.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="448.8" y="2212.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="310.0" y="2252.0" width="417.3" height="240.0" fill="#fafafa" stroke="#b5b5b5" stroke-width="1"/>
+<text x="342.0" y="2304.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">01</text>
+<text x="342.0" y="2362.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="28" font-weight="400" fill="#3a3a3a" text-anchor="start">Пушкинская карта</text>
+<rect x="342.0" y="2386.0" width="353.3" height="7.0" fill="#bdbdbd"/>
+<rect x="342.0" y="2404.0" width="212.0" height="7.0" fill="#bdbdbd"/>
+<text x="342.0" y="2462.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">Подробнее</text>
+<line x1="342.0" y1="2469.0" x2="407.5" y2="2469.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="421.5" y="2462.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="751.3" y="2252.0" width="417.3" height="240.0" fill="#fafafa" stroke="#b5b5b5" stroke-width="1"/>
+<text x="783.3" y="2304.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">02</text>
+<text x="783.3" y="2362.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="28" font-weight="400" fill="#3a3a3a" text-anchor="start">Школьный абонемент</text>
+<rect x="783.3" y="2386.0" width="353.3" height="7.0" fill="#bdbdbd"/>
+<rect x="783.3" y="2404.0" width="212.0" height="7.0" fill="#bdbdbd"/>
+<text x="783.3" y="2462.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">Подробнее</text>
+<line x1="783.3" y1="2469.0" x2="848.9" y2="2469.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="862.9" y="2462.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="1192.7" y="2252.0" width="417.3" height="240.0" fill="#fafafa" stroke="#b5b5b5" stroke-width="1"/>
+<text x="1224.7" y="2304.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">03</text>
+<text x="1224.7" y="2362.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="28" font-weight="400" fill="#3a3a3a" text-anchor="start">Творческая школа</text>
+<rect x="1224.7" y="2386.0" width="353.3" height="7.0" fill="#bdbdbd"/>
+<rect x="1224.7" y="2404.0" width="212.0" height="7.0" fill="#bdbdbd"/>
+<text x="1224.7" y="2462.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">Подробнее</text>
+<line x1="1224.7" y1="2469.0" x2="1290.2" y2="2469.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="1304.2" y="2462.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="0.0" y="2622.0" width="1920.0" height="760.0" fill="#3c3c3c"/>
+<rect x="310.0" y="2712.0" width="527.7" height="560.0" fill="#565656" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="310.0" y1="2712.0" x2="837.7" y2="3272.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="837.7" y1="2712.0" x2="310.0" y2="3272.0" stroke="#8f8f8f" stroke-width="1"/>
+<text x="972.0" y="2742.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#9d9d9d" text-anchor="start" letter-spacing="2">ОБ ОРКЕСТРЕ</text>
+<text x="972.0" y="2822.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#e7e7e7" text-anchor="start">Сохраняя</text>
+<text x="972.0" y="2884.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#e7e7e7" text-anchor="start">национальный код —</text>
+<text x="972.0" y="2946.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#e7e7e7" text-anchor="start">объединяем сердца</text>
+<rect x="972.0" y="2992.0" width="638.0" height="9.0" fill="#8f8f8f"/>
+<rect x="972.0" y="3016.0" width="638.0" height="9.0" fill="#8f8f8f"/>
+<rect x="972.0" y="3040.0" width="382.8" height="9.0" fill="#8f8f8f"/>
+<text x="972.0" y="3112.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">История оркестра</text>
+<line x1="972.0" y1="3119.0" x2="1096.8" y2="3119.0" stroke="#dcdcdc" stroke-width="1"/>
+<text x="1110.8" y="3112.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">→</text>
+<text x="1202.0" y="3112.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">Состав</text>
+<line x1="1202.0" y1="3119.0" x2="1248.8" y2="3119.0" stroke="#dcdcdc" stroke-width="1"/>
+<text x="1262.8" y="3112.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">→</text>
+<text x="1432.0" y="3112.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">Игорь Тонин</text>
+<line x1="1432.0" y1="3119.0" x2="1517.8" y2="3119.0" stroke="#dcdcdc" stroke-width="1"/>
+<text x="1531.8" y="3112.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">→</text>
+<rect x="0.0" y="3382.0" width="1920.0" height="740.0" fill="#e4e4e4"/>
+<text x="310.0" y="3462.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">ШКОЛАМ И ОРГАНИЗАЦИЯМ</text>
+<text x="310.0" y="3532.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="46" font-weight="400" fill="#3a3a3a" text-anchor="start">Пригласите</text>
+<text x="310.0" y="3584.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="46" font-weight="400" fill="#3a3a3a" text-anchor="start">оркестр на своё</text>
+<text x="310.0" y="3636.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="46" font-weight="400" fill="#3a3a3a" text-anchor="start">мероприятие</text>
+<rect x="310.0" y="3682.0" width="527.7" height="8.0" fill="#bdbdbd"/>
+<rect x="310.0" y="3703.0" width="527.7" height="8.0" fill="#bdbdbd"/>
+<rect x="310.0" y="3724.0" width="316.6" height="8.0" fill="#bdbdbd"/>
+<text x="310.0" y="3802.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Условия абонемента</text>
+<line x1="310.0" y1="3809.0" x2="450.4" y2="3809.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="464.4" y="3802.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<text x="310.0" y="3852.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Приглашаем к сотрудничеству</text>
+<line x1="310.0" y1="3859.0" x2="520.6" y2="3859.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="534.6" y="3852.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="972.0" y="3452.0" width="638.0" height="600.0" fill="#fafafa" stroke="#b5b5b5" stroke-width="1"/>
+<text x="1012.0" y="3512.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="30" font-weight="400" fill="#3a3a3a" text-anchor="start">Напишите нам</text>
+<text x="1012.0" y="3566.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Имя</text>
+<line x1="1012.0" y1="3590.0" x2="1570.0" y2="3590.0" stroke="#b9b9b9" stroke-width="1"/>
+<text x="1012.0" y="3638.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Организация</text>
+<line x1="1012.0" y1="3662.0" x2="1570.0" y2="3662.0" stroke="#b9b9b9" stroke-width="1"/>
+<text x="1012.0" y="3710.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Телефон или e-mail</text>
+<line x1="1012.0" y1="3734.0" x2="1570.0" y2="3734.0" stroke="#b9b9b9" stroke-width="1"/>
+<text x="1012.0" y="3782.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Сообщение</text>
+<line x1="1012.0" y1="3848.0" x2="1570.0" y2="3848.0" stroke="#b9b9b9" stroke-width="1"/>
+<rect x="1012.0" y="3572.0" width="18.0" height="18.0" fill="none" stroke="#9a9a9a" stroke-width="1"/>
+<text x="1040.0" y="3586.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start">Согласие с правилами</text>
+<rect x="1012.0" y="3882.0" width="558.0" height="50.0" fill="#2e2e2e"/>
+<text x="1291.0" y="3912.4" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#f2f2f2" text-anchor="middle">Отправить заявку</text>
+<rect x="0.0" y="4122.0" width="1920.0" height="620.0" fill="#e4e4e4"/>
+<text x="310.0" y="4202.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">МЕДИА</text>
+<text x="310.0" y="4262.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#3a3a3a" text-anchor="start">Слушать и смотреть</text>
+<rect x="310.0" y="4322.0" width="307.0" height="250.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="310.0" y1="4322.0" x2="617.0" y2="4572.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="617.0" y1="4322.0" x2="310.0" y2="4572.0" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="641.0" y="4322.0" width="307.0" height="250.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="641.0" y1="4322.0" x2="948.0" y2="4572.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="948.0" y1="4322.0" x2="641.0" y2="4572.0" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="972.0" y="4322.0" width="307.0" height="250.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="972.0" y1="4322.0" x2="1279.0" y2="4572.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="1279.0" y1="4322.0" x2="972.0" y2="4572.0" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="1303.0" y="4322.0" width="307.0" height="250.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="1303.0" y1="4322.0" x2="1610.0" y2="4572.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="1610.0" y1="4322.0" x2="1303.0" y2="4572.0" stroke="#8f8f8f" stroke-width="1"/>
+<text x="310.0" y="4632.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Фотогалерея</text>
+<line x1="310.0" y1="4639.0" x2="395.8" y2="4639.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="409.8" y="4632.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="0.0" y="4742.0" width="1920.0" height="560.0" fill="#3c3c3c"/>
+<line x1="0.0" y1="4742.0" x2="1920.0" y2="4742.0" stroke="#5a5a5a" stroke-width="1"/>
+<rect x="310.0" y="4812.0" width="120.0" height="34.0" fill="none" stroke="#8c8c8c" stroke-width="1"/>
+<text x="370.0" y="4834.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#cfcfcf" text-anchor="middle">ЛОГО</text>
+<rect x="310.0" y="4872.0" width="307.0" height="7.0" fill="#6f6f6f"/>
+<rect x="310.0" y="4891.0" width="307.0" height="7.0" fill="#6f6f6f"/>
+<rect x="310.0" y="4910.0" width="184.2" height="7.0" fill="#6f6f6f"/>
+<text x="751.3" y="4828.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#9d9d9d" text-anchor="start" letter-spacing="2">РАЗДЕЛЫ</text>
+<text x="751.3" y="4870.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Об оркестре</text>
+<text x="751.3" y="4904.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Новости</text>
+<text x="751.3" y="4938.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Медиа</text>
+<text x="751.3" y="4972.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Программы</text>
+<text x="751.3" y="5006.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Пушкинская карта</text>
+<text x="1082.3" y="4828.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#9d9d9d" text-anchor="start" letter-spacing="2">КОНТАКТЫ</text>
+<text x="1082.3" y="4870.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">пл. Стачек, 4, Санкт-Петербург</text>
+<text x="1082.3" y="4904.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">+7 (812) 539-63-58</text>
+<text x="1082.3" y="4938.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">metelitsa.spb@ya.ru</text>
+<text x="1082.3" y="4972.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Все контакты →</text>
+<text x="1413.3" y="4828.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#9d9d9d" text-anchor="start" letter-spacing="2">МЫ В СЕТИ</text>
+<text x="1413.3" y="4870.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">ВКонтакте</text>
+<text x="1413.3" y="4904.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">RuTube</text>
+<text x="1413.3" y="4938.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Яндекс Карты</text>
+<text x="1413.3" y="4972.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">YouTube</text>
+<line x1="310.0" y1="5212.0" x2="1610.0" y2="5212.0" stroke="#5a5a5a" stroke-width="1"/>
+<text x="310.0" y="5250.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#a7a7a7" text-anchor="start">Учредитель: Комитет по культуре и туризму Ленинградской области</text>
+<text x="1610.0" y="5250.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#a7a7a7" text-anchor="end">© 2009–2026 Государственный оркестр «Метелица»</text></svg></div><figcaption>Рисунок 2 – Полный вайрфрейм лендинга: восемь блоков в сетке 1920 px</figcaption></figure><h3>4.1. Блок «Билеты и абонементы»</h3><p>Главный блок покупки. «Ближайшие концерты» — список строк одинакового строения: крупная дата,
+тип и название, площадка, стрелка. Одинаковое оформление строк (<b>схожесть</b>) и выравнивание по
+колонкам (<b>продолжение</b>) позволяют быстро сканировать афишу; тонкие линии-разделители и равные
+отступы объединяют строку в группу (<b>близость</b>). Ниже — три карточки продуктов («Пушкинская
+карта», «Школьный абонемент», «Творческая школа») в прямоугольных областях с рамкой — пример
+принципа <b>общей области</b>. Каждая карточка открывает своё всплывающее окно.</p><figure><div class="figbox" ><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="1920" height="1102" viewBox="0 0 1920 1102"><rect x="0" y="0" width="1920" height="1102" fill="#e4e4e4"/><rect x="0.0" y="0.0" width="1920.0" height="1102.0" fill="#e4e4e4"/>
+<text x="310.0" y="70.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">БИЛЕТЫ И АБОНЕМЕНТЫ</text>
+<text x="310.0" y="128.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#3a3a3a" text-anchor="start">Ближайшие концерты</text>
+<line x1="310.0" y1="170.0" x2="1610.0" y2="170.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="234.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="44" font-weight="400" fill="#3a3a3a" text-anchor="start">11</text>
+<text x="310.0" y="264.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">октября 2026</text>
+<text x="530.7" y="214.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="11" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="1.4">КОНЦЕРТ</text>
+<text x="530.7" y="246.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">«В ритме времени»</text>
+<text x="1192.7" y="236.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="start">Яани Кирик</text>
+<text x="1610.0" y="236.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">→</text>
+<line x1="310.0" y1="288.0" x2="1610.0" y2="288.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="352.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="44" font-weight="400" fill="#3a3a3a" text-anchor="start">12</text>
+<text x="310.0" y="382.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">апреля 2026</text>
+<text x="530.7" y="332.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="11" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="1.4">ФЕСТИВАЛЬ</text>
+<text x="530.7" y="364.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">«Гуслей серебристый перезвон»</text>
+<text x="1192.7" y="354.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="start">Капелла Санкт-Петербурга</text>
+<text x="1610.0" y="354.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">→</text>
+<line x1="310.0" y1="406.0" x2="1610.0" y2="406.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="470.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="44" font-weight="400" fill="#3a3a3a" text-anchor="start">8</text>
+<text x="310.0" y="500.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">июня</text>
+<text x="530.7" y="450.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="11" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="1.4">КОНЦЕРТ</text>
+<text x="530.7" y="482.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">Ко Дню семьи, любви и верности</text>
+<text x="1192.7" y="472.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="start">Ленинградская область</text>
+<text x="1610.0" y="472.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">→</text>
+<line x1="310.0" y1="524.0" x2="1610.0" y2="524.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="588.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="44" font-weight="400" fill="#3a3a3a" text-anchor="start">28</text>
+<text x="310.0" y="618.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="start">декабря</text>
+<text x="530.7" y="568.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="11" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="1.4">КОНЦЕРТ</text>
+<text x="530.7" y="600.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">Новогодний «Киносерпантин»</text>
+<text x="1192.7" y="590.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="start">Капелла Санкт-Петербурга</text>
+<text x="1610.0" y="590.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">→</text>
+<line x1="310.0" y1="642.0" x2="1610.0" y2="642.0" stroke="#c9c9c9" stroke-width="1"/>
+<text x="310.0" y="692.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Весь архив афиши</text>
+<line x1="310.0" y1="699.0" x2="434.8" y2="699.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="448.8" y="692.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="310.0" y="732.0" width="417.3" height="240.0" fill="#fafafa" stroke="#b5b5b5" stroke-width="1"/>
+<text x="342.0" y="784.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">01</text>
+<text x="342.0" y="842.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="28" font-weight="400" fill="#3a3a3a" text-anchor="start">Пушкинская карта</text>
+<rect x="342.0" y="866.0" width="353.3" height="7.0" fill="#bdbdbd"/>
+<rect x="342.0" y="884.0" width="212.0" height="7.0" fill="#bdbdbd"/>
+<text x="342.0" y="942.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">Подробнее</text>
+<line x1="342.0" y1="949.0" x2="407.5" y2="949.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="421.5" y="942.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="751.3" y="732.0" width="417.3" height="240.0" fill="#fafafa" stroke="#b5b5b5" stroke-width="1"/>
+<text x="783.3" y="784.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">02</text>
+<text x="783.3" y="842.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="28" font-weight="400" fill="#3a3a3a" text-anchor="start">Школьный абонемент</text>
+<rect x="783.3" y="866.0" width="353.3" height="7.0" fill="#bdbdbd"/>
+<rect x="783.3" y="884.0" width="212.0" height="7.0" fill="#bdbdbd"/>
+<text x="783.3" y="942.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">Подробнее</text>
+<line x1="783.3" y1="949.0" x2="848.9" y2="949.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="862.9" y="942.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="1192.7" y="732.0" width="417.3" height="240.0" fill="#fafafa" stroke="#b5b5b5" stroke-width="1"/>
+<text x="1224.7" y="784.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">03</text>
+<text x="1224.7" y="842.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="28" font-weight="400" fill="#3a3a3a" text-anchor="start">Творческая школа</text>
+<rect x="1224.7" y="866.0" width="353.3" height="7.0" fill="#bdbdbd"/>
+<rect x="1224.7" y="884.0" width="212.0" height="7.0" fill="#bdbdbd"/>
+<text x="1224.7" y="942.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">Подробнее</text>
+<line x1="1224.7" y1="949.0" x2="1290.2" y2="949.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="1304.2" y="942.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text></svg></div><figcaption>Рисунок 3 – Блок «Билеты и абонементы»</figcaption></figure><h3>4.2. Блок «Об оркестре»</h3><p>Блок доверия. Фотография художественного руководителя слева, текст и цитата справа — текст слева,
+акцент справа, как рекомендует методичка. Крупный заголовок, абзац истории и три ссылки со стрелками
+(«История оркестра», «Состав», «Игорь Тонин») выровнены по левому краю колонки (<b>продолжение</b>),
+а одинаковое оформление ссылок указывает на их общее назначение (<b>схожесть</b>). Тёмный фон блока
+отделяет его от светлых соседних блоков (<b>общая область</b>).</p><figure><div class="figbox" ><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="1920" height="760" viewBox="0 0 1920 760"><rect x="0" y="0" width="1920" height="760" fill="#3c3c3c"/><rect x="0.0" y="0.0" width="1920.0" height="760.0" fill="#3c3c3c"/>
+<rect x="310.0" y="90.0" width="527.7" height="560.0" fill="#565656" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="310.0" y1="90.0" x2="837.7" y2="650.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="837.7" y1="90.0" x2="310.0" y2="650.0" stroke="#8f8f8f" stroke-width="1"/>
+<text x="972.0" y="120.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#9d9d9d" text-anchor="start" letter-spacing="2">ОБ ОРКЕСТРЕ</text>
+<text x="972.0" y="200.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#e7e7e7" text-anchor="start">Сохраняя</text>
+<text x="972.0" y="262.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#e7e7e7" text-anchor="start">национальный код —</text>
+<text x="972.0" y="324.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#e7e7e7" text-anchor="start">объединяем сердца</text>
+<rect x="972.0" y="370.0" width="638.0" height="9.0" fill="#8f8f8f"/>
+<rect x="972.0" y="394.0" width="638.0" height="9.0" fill="#8f8f8f"/>
+<rect x="972.0" y="418.0" width="382.8" height="9.0" fill="#8f8f8f"/>
+<text x="972.0" y="490.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">История оркестра</text>
+<line x1="972.0" y1="497.0" x2="1096.8" y2="497.0" stroke="#dcdcdc" stroke-width="1"/>
+<text x="1110.8" y="490.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">→</text>
+<text x="1202.0" y="490.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">Состав</text>
+<line x1="1202.0" y1="497.0" x2="1248.8" y2="497.0" stroke="#dcdcdc" stroke-width="1"/>
+<text x="1262.8" y="490.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">→</text>
+<text x="1432.0" y="490.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">Игорь Тонин</text>
+<line x1="1432.0" y1="497.0" x2="1517.8" y2="497.0" stroke="#dcdcdc" stroke-width="1"/>
+<text x="1531.8" y="490.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#dcdcdc" text-anchor="start">→</text></svg></div><figcaption>Рисунок 4 – Блок «Об оркестре»</figcaption></figure><h3>4.3. Блок «Школам и организациям»</h3><p>Второе целевое действие — заявка от школы или организации (персона Марина Сергеевна). Слева —
+заголовок и ссылки «Условия абонемента» и «Приглашаем к сотрудничеству»; справа, в единой
+прямоугольной области-карточке, — форма заявки (имя, организация, телефон или e-mail, сообщение,
+согласие, кнопка). Форма собрана в одну <b>общую область</b>, поля с нижней линией одинаковы
+(<b>схожесть</b>) и расположены плотной группой (<b>близость</b>). Залитая кнопка «Отправить заявку» —
+единственный акцент (аномалия в принципе схожести). После отправки открывается окно «Заявка
+отправлена».</p><figure><div class="figbox" ><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="1920" height="740" viewBox="0 0 1920 740"><rect x="0" y="0" width="1920" height="740" fill="#e4e4e4"/><rect x="0.0" y="0.0" width="1920.0" height="740.0" fill="#e4e4e4"/>
+<text x="310.0" y="80.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">ШКОЛАМ И ОРГАНИЗАЦИЯМ</text>
+<text x="310.0" y="150.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="46" font-weight="400" fill="#3a3a3a" text-anchor="start">Пригласите</text>
+<text x="310.0" y="202.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="46" font-weight="400" fill="#3a3a3a" text-anchor="start">оркестр на своё</text>
+<text x="310.0" y="254.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="46" font-weight="400" fill="#3a3a3a" text-anchor="start">мероприятие</text>
+<rect x="310.0" y="300.0" width="527.7" height="8.0" fill="#bdbdbd"/>
+<rect x="310.0" y="321.0" width="527.7" height="8.0" fill="#bdbdbd"/>
+<rect x="310.0" y="342.0" width="316.6" height="8.0" fill="#bdbdbd"/>
+<text x="310.0" y="420.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Условия абонемента</text>
+<line x1="310.0" y1="427.0" x2="450.4" y2="427.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="464.4" y="420.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<text x="310.0" y="470.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Приглашаем к сотрудничеству</text>
+<line x1="310.0" y1="477.0" x2="520.6" y2="477.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="534.6" y="470.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text>
+<rect x="972.0" y="70.0" width="638.0" height="600.0" fill="#fafafa" stroke="#b5b5b5" stroke-width="1"/>
+<text x="1012.0" y="130.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="30" font-weight="400" fill="#3a3a3a" text-anchor="start">Напишите нам</text>
+<text x="1012.0" y="184.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Имя</text>
+<line x1="1012.0" y1="208.0" x2="1570.0" y2="208.0" stroke="#b9b9b9" stroke-width="1"/>
+<text x="1012.0" y="256.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Организация</text>
+<line x1="1012.0" y1="280.0" x2="1570.0" y2="280.0" stroke="#b9b9b9" stroke-width="1"/>
+<text x="1012.0" y="328.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Телефон или e-mail</text>
+<line x1="1012.0" y1="352.0" x2="1570.0" y2="352.0" stroke="#b9b9b9" stroke-width="1"/>
+<text x="1012.0" y="400.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Сообщение</text>
+<line x1="1012.0" y1="466.0" x2="1570.0" y2="466.0" stroke="#b9b9b9" stroke-width="1"/>
+<rect x="1012.0" y="190.0" width="18.0" height="18.0" fill="none" stroke="#9a9a9a" stroke-width="1"/>
+<text x="1040.0" y="204.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start">Согласие с правилами</text>
+<rect x="1012.0" y="500.0" width="558.0" height="50.0" fill="#2e2e2e"/>
+<text x="1291.0" y="530.4" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#f2f2f2" text-anchor="middle">Отправить заявку</text></svg></div><figcaption>Рисунок 5 – Блок «Школам и организациям» с формой заявки</figcaption></figure><h3>4.4. Блок «Медиа»</h3><p>Блок «продаёт впечатление» новой аудитории (персона Дмитрий). Заголовок «Слушать и смотреть»
+и ряд из четырёх фотографий одинакового размера, выстроенных по сетке. Равные размеры и
+расстояния делают галерею единым рядом (<b>схожесть</b>, <b>продолжение</b>), а клик по фото
+открывает лайтбокс. Ссылка «Фотогалерея» ведёт к полной галерее.</p><figure><div class="figbox" ><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="1920" height="620" viewBox="0 0 1920 620"><rect x="0" y="0" width="1920" height="620" fill="#e4e4e4"/><rect x="0.0" y="0.0" width="1920.0" height="620.0" fill="#e4e4e4"/>
+<text x="310.0" y="80.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">МЕДИА</text>
+<text x="310.0" y="140.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#3a3a3a" text-anchor="start">Слушать и смотреть</text>
+<rect x="310.0" y="200.0" width="307.0" height="250.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="310.0" y1="200.0" x2="617.0" y2="450.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="617.0" y1="200.0" x2="310.0" y2="450.0" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="641.0" y="200.0" width="307.0" height="250.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="641.0" y1="200.0" x2="948.0" y2="450.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="948.0" y1="200.0" x2="641.0" y2="450.0" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="972.0" y="200.0" width="307.0" height="250.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="972.0" y1="200.0" x2="1279.0" y2="450.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="1279.0" y1="200.0" x2="972.0" y2="450.0" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="1303.0" y="200.0" width="307.0" height="250.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="1303.0" y1="200.0" x2="1610.0" y2="450.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="1610.0" y1="200.0" x2="1303.0" y2="450.0" stroke="#8f8f8f" stroke-width="1"/>
+<text x="310.0" y="510.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Фотогалерея</text>
+<line x1="310.0" y1="517.0" x2="395.8" y2="517.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="409.8" y="510.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text></svg></div><figcaption>Рисунок 6 – Блок «Медиа»</figcaption></figure><h3>4.5. Подвал (контакты)</h3><p>Завершающий блок с обязательной информацией госучреждения. Логотип и описание, колонки
+«Разделы», «Контакты», «Мы в сети», ниже — учредитель и копирайт. Информация сгруппирована по
+колонкам (<b>близость</b>, <b>симметрия</b>): связанные ссылки стоят вместе, несвязанные группы
+разведены пробелами. Тёмный фон и верхняя линия отделяют подвал и завершают <b>продолжение</b>
+страницы.</p><figure><div class="figbox" ><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="1920" height="560" viewBox="0 0 1920 560"><rect x="0" y="0" width="1920" height="560" fill="#3c3c3c"/><rect x="0.0" y="0.0" width="1920.0" height="560.0" fill="#3c3c3c"/>
+<line x1="0.0" y1="0.0" x2="1920.0" y2="0.0" stroke="#5a5a5a" stroke-width="1"/>
+<rect x="310.0" y="70.0" width="120.0" height="34.0" fill="none" stroke="#8c8c8c" stroke-width="1"/>
+<text x="370.0" y="92.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#cfcfcf" text-anchor="middle">ЛОГО</text>
+<rect x="310.0" y="130.0" width="307.0" height="7.0" fill="#6f6f6f"/>
+<rect x="310.0" y="149.0" width="307.0" height="7.0" fill="#6f6f6f"/>
+<rect x="310.0" y="168.0" width="184.2" height="7.0" fill="#6f6f6f"/>
+<text x="751.3" y="86.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#9d9d9d" text-anchor="start" letter-spacing="2">РАЗДЕЛЫ</text>
+<text x="751.3" y="128.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Об оркестре</text>
+<text x="751.3" y="162.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Новости</text>
+<text x="751.3" y="196.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Медиа</text>
+<text x="751.3" y="230.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Программы</text>
+<text x="751.3" y="264.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Пушкинская карта</text>
+<text x="1082.3" y="86.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#9d9d9d" text-anchor="start" letter-spacing="2">КОНТАКТЫ</text>
+<text x="1082.3" y="128.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">пл. Стачек, 4, Санкт-Петербург</text>
+<text x="1082.3" y="162.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">+7 (812) 539-63-58</text>
+<text x="1082.3" y="196.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">metelitsa.spb@ya.ru</text>
+<text x="1082.3" y="230.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Все контакты →</text>
+<text x="1413.3" y="86.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#9d9d9d" text-anchor="start" letter-spacing="2">МЫ В СЕТИ</text>
+<text x="1413.3" y="128.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">ВКонтакте</text>
+<text x="1413.3" y="162.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">RuTube</text>
+<text x="1413.3" y="196.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">Яндекс Карты</text>
+<text x="1413.3" y="230.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14.5" font-weight="400" fill="#cfcfcf" text-anchor="start">YouTube</text>
+<line x1="310.0" y1="470.0" x2="1610.0" y2="470.0" stroke="#5a5a5a" stroke-width="1"/>
+<text x="310.0" y="508.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#a7a7a7" text-anchor="start">Учредитель: Комитет по культуре и туризму Ленинградской области</text>
+<text x="1610.0" y="508.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#a7a7a7" text-anchor="end">© 2009–2026 Государственный оркестр «Метелица»</text></svg></div><figcaption>Рисунок 7 – Подвал лендинга (контакты)</figcaption></figure><h2>5. Всплывающие окна</h2><p>Окна повторяют интерфейсный стиль макета: прямые углы, тонкие обводки, поля ввода с нижней
+линией, подчёркнутые ссылки со стрелкой. Модальные окна занимают 6 центральных колонок сетки
+(≈ 638 px), медиа-окна (видео, галерея) шире — 10 колонок. Страница под окном затемняется; окно
+закрывается крестиком, кликом вне окна или клавишей Esc. Затемнение фона и вынос окна на передний
+план — применение принципов <b>общей области</b> и <b>фигуры/фона</b>.</p><div class="tcap">Таблица 2 – Всплывающие окна и точки вызова</div><table>
+<tr><th>Окно</th><th>Откуда открывается</th></tr>
+<tr><td>«Покупка билета»</td><td>«Купить билет» в шапке, «Подробнее и билеты» на карточке концерта, «Подробнее» в списке концертов</td></tr>
+<tr><td>«Билет оформлен»</td><td>Возврат с платёжной страницы после успешной оплаты</td></tr>
+<tr><td>«Пушкинская карта»</td><td>Факт «Пушкинская карта» в интро, карточка «Пушкинская карта»</td></tr>
+<tr><td>«Школьный абонемент»</td><td>Карточка «Школьный абонемент», ссылка «Условия абонемента»</td></tr>
+<tr><td>«Видеоплеер»</td><td>Кнопка «Смотреть видео», карточка «Видео»</td></tr>
+<tr><td>«Фотогалерея» (лайтбокс)</td><td>Фото с концертов и карточка «Фотогалерея» в блоке «Медиа»</td></tr>
+<tr><td>«Заявка отправлена»</td><td>Успешная отправка формы в блоке «Школам и организациям»</td></tr>
+</table><figure><div class="figbox" style="max-width:120mm;margin:0 auto;"><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="760" height="720" viewBox="0 0 760 720"><rect x="0.0" y="0.0" width="760.0" height="720.0" fill="#575757"/>
+<rect x="80.0" y="40.0" width="600.0" height="640.0" fill="#f4f4f4" stroke="#cfcfcf" stroke-width="1"/>
+<text x="650.0" y="78.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">✕</text>
+<text x="120.0" y="100.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">ПОКУПКА БИЛЕТА</text>
+<text x="120.0" y="168.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="56" font-weight="400" fill="#3a3a3a" text-anchor="start">11</text>
+<text x="220.0" y="150.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="22" font-weight="400" fill="#3a3a3a" text-anchor="start">«В ритме времени»</text>
+<text x="220.0" y="180.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="start">11 октября 2026 · Яани Кирик</text>
+<line x1="120.0" y1="210.0" x2="640.0" y2="210.0" stroke="#c4c4c4" stroke-width="1"/>
+<text x="120.0" y="250.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Партер</text>
+<text x="490.0" y="250.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="end">— 0 +</text>
+<rect x="520.0" y="228.0" width="120.0" height="32.0" fill="none" stroke="#b5b5b5" stroke-width="1"/>
+<text x="120.0" y="310.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Амфитеатр</text>
+<text x="490.0" y="310.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="end">— 0 +</text>
+<rect x="520.0" y="288.0" width="120.0" height="32.0" fill="none" stroke="#b5b5b5" stroke-width="1"/>
+<text x="120.0" y="370.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Балкон</text>
+<text x="490.0" y="370.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#6f6f6f" text-anchor="end">— 0 +</text>
+<rect x="520.0" y="348.0" width="120.0" height="32.0" fill="none" stroke="#b5b5b5" stroke-width="1"/>
+<line x1="120.0" y1="440.0" x2="640.0" y2="440.0" stroke="#c4c4c4" stroke-width="1"/>
+<rect x="120.0" y="470.0" width="250.0" height="40.0" fill="none" stroke="#b5b5b5" stroke-width="1"/>
+<text x="134.0" y="495.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Банковская карта</text>
+<rect x="390.0" y="470.0" width="250.0" height="40.0" fill="none" stroke="#8f8f8f" stroke-width="1"/>
+<text x="404.0" y="495.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#3a3a3a" text-anchor="start">Пушкинская (14–22)</text>
+<text x="120.0" y="548.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">E-mail — регистрация не нужна</text>
+<line x1="120.0" y1="566.0" x2="640.0" y2="566.0" stroke="#b5b5b5" stroke-width="1"/>
+<rect x="120.0" y="596.0" width="18.0" height="18.0" fill="none" stroke="#9a9a9a" stroke-width="1"/>
+<text x="148.0" y="610.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start">Согласен с правилами продажи</text>
+<text x="120.0" y="650.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="16" font-weight="400" fill="#3a3a3a" text-anchor="start">Итого: 0 ₽</text>
+<rect x="420.0" y="630.0" width="220.0" height="44.0" fill="#2e2e2e"/>
+<text x="530.0" y="657.4" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#f2f2f2" text-anchor="middle">Перейти к оплате</text></svg></div><figcaption>Рисунок 8 – Pop-up «Покупка билета»</figcaption></figure><figure><div class="figbox" style="max-width:120mm;margin:0 auto;"><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="760" height="440" viewBox="0 0 760 440"><rect x="0.0" y="0.0" width="760.0" height="440.0" fill="#575757"/>
+<rect x="80.0" y="40.0" width="600.0" height="360.0" fill="#f4f4f4" stroke="#cfcfcf" stroke-width="1"/>
+<text x="650.0" y="78.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">✕</text>
+<rect x="354.0" y="120.0" width="52.0" height="52.0" fill="none" stroke="#7a7a7a" stroke-width="1"/>
+<line x1="368.0" y1="146.0" x2="378.0" y2="158.0" stroke="#7a7a7a" stroke-width="2"/>
+<line x1="378.0" y1="158.0" x2="396.0" y2="132.0" stroke="#7a7a7a" stroke-width="2"/>
+<text x="380.0" y="215.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="28" font-weight="400" fill="#3a3a3a" text-anchor="middle">Билет оформлен</text>
+<rect x="180.0" y="250.0" width="400.0" height="7.0" fill="#bdbdbd"/>
+<rect x="180.0" y="269.0" width="240.0" height="7.0" fill="#bdbdbd"/>
+<rect x="260.0" y="320.0" width="240.0" height="44.0" fill="none" stroke="#b5b5b5" stroke-width="1"/>
+<text x="380.0" y="347.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="middle">Добавить в календарь</text></svg></div><figcaption>Рисунок 9 – Pop-up «Билет оформлен»</figcaption></figure><figure><div class="figbox" style="max-width:120mm;margin:0 auto;"><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="760" height="560" viewBox="0 0 760 560"><rect x="0.0" y="0.0" width="760.0" height="560.0" fill="#575757"/>
+<rect x="80.0" y="40.0" width="600.0" height="480.0" fill="#f4f4f4" stroke="#cfcfcf" stroke-width="1"/>
+<text x="650.0" y="78.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">✕</text>
+<text x="120.0" y="100.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">ПУШКИНСКАЯ КАРТА</text>
+<text x="120.0" y="150.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">Как оплатить картой</text>
+<text x="120.0" y="230.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="30" font-weight="400" fill="#6f6f6f" text-anchor="start">01</text>
+<text x="190.0" y="210.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Оформите Пушкинскую карту на Госуслугах</text>
+<rect x="190.0" y="226.0" width="270.0" height="7.0" fill="#bdbdbd"/>
+<text x="120.0" y="316.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="30" font-weight="400" fill="#6f6f6f" text-anchor="start">02</text>
+<text x="190.0" y="296.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Выберите концерт оркестра «Метелица»</text>
+<rect x="190.0" y="312.0" width="270.0" height="7.0" fill="#bdbdbd"/>
+<text x="120.0" y="402.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="30" font-weight="400" fill="#6f6f6f" text-anchor="start">03</text>
+<text x="190.0" y="382.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#3a3a3a" text-anchor="start">Оплатите билет картой при оформлении</text>
+<rect x="190.0" y="398.0" width="270.0" height="7.0" fill="#bdbdbd"/>
+<rect x="120.0" y="500.0" width="220.0" height="44.0" fill="#2e2e2e"/>
+<text x="230.0" y="527.4" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#f2f2f2" text-anchor="middle">Выбрать концерт</text></svg></div><figcaption>Рисунок 10 – Pop-up «Пушкинская карта»</figcaption></figure><figure><div class="figbox" style="max-width:120mm;margin:0 auto;"><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="760" height="620" viewBox="0 0 760 620"><rect x="0.0" y="0.0" width="760.0" height="620.0" fill="#575757"/>
+<rect x="80.0" y="40.0" width="600.0" height="540.0" fill="#f4f4f4" stroke="#cfcfcf" stroke-width="1"/>
+<text x="650.0" y="78.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">✕</text>
+<text x="120.0" y="100.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="12" font-weight="400" fill="#6f6f6f" text-anchor="start" letter-spacing="2">ШКОЛЬНЫЙ АБОНЕМЕНТ</text>
+<text x="120.0" y="150.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">«Волшебный мир</text>
+<text x="120.0" y="184.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="start">народной музыки»</text>
+<text x="120.0" y="240.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">01</text>
+<rect x="154.0" y="230.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<text x="120.0" y="292.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">02</text>
+<rect x="154.0" y="282.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<text x="120.0" y="344.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">03</text>
+<rect x="154.0" y="334.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<text x="120.0" y="396.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">04</text>
+<rect x="154.0" y="386.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<text x="120.0" y="448.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">05</text>
+<rect x="154.0" y="438.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<text x="380.0" y="240.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">06</text>
+<rect x="414.0" y="230.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<text x="380.0" y="292.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">07</text>
+<rect x="414.0" y="282.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<text x="380.0" y="344.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">08</text>
+<rect x="414.0" y="334.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<text x="380.0" y="396.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">09</text>
+<rect x="414.0" y="386.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<text x="380.0" y="448.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">10</text>
+<rect x="414.0" y="438.0" width="114.0" height="8.0" fill="#c3c3c3"/>
+<line x1="120.0" y1="520.0" x2="640.0" y2="520.0" stroke="#c4c4c4" stroke-width="1"/>
+<text x="120.0" y="556.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#6f6f6f" text-anchor="start">Концерты и мастер-классы по 40–45 минут</text>
+<rect x="420.0" y="536.0" width="220.0" height="44.0" fill="#2e2e2e"/>
+<text x="530.0" y="563.4" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="15" font-weight="400" fill="#f2f2f2" text-anchor="middle">Оставить заявку</text></svg></div><figcaption>Рисунок 11 – Pop-up «Школьный абонемент»</figcaption></figure><figure><div class="figbox" style="max-width:150mm;margin:0 auto;"><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="860" height="600" viewBox="0 0 860 600"><rect x="0.0" y="0.0" width="860.0" height="600.0" fill="#575757"/>
+<rect x="50.0" y="40.0" width="760.0" height="520.0" fill="#f4f4f4" stroke="#cfcfcf" stroke-width="1"/>
+<text x="780.0" y="78.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">✕</text>
+<rect x="90.0" y="100.0" width="680.0" height="380.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="90.0" y1="100.0" x2="770.0" y2="480.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="770.0" y1="100.0" x2="90.0" y2="480.0" stroke="#8f8f8f" stroke-width="1"/>
+<polygon points="412.0,266 456.0,290 412.0,314" fill="none" stroke="#8f8f8f"/>
+<line x1="90.0" y1="510.0" x2="770.0" y2="510.0" stroke="#9a9a9a" stroke-width="4"/>
+<text x="90.0" y="548.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="start">В чешских лугах и лесах — концерт оркестра</text>
+<text x="90.0" y="578.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#3a3a3a" text-anchor="start">Канал оркестра на RuTube</text>
+<line x1="90.0" y1="585.0" x2="252.2" y2="585.0" stroke="#3a3a3a" stroke-width="1"/>
+<text x="266.2" y="578.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="13" font-weight="400" fill="#3a3a3a" text-anchor="start">→</text></svg></div><figcaption>Рисунок 12 – Pop-up «Видеоплеер»</figcaption></figure><figure><div class="figbox" style="max-width:150mm;margin:0 auto;"><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="860" height="620" viewBox="0 0 860 620"><rect x="0.0" y="0.0" width="860.0" height="620.0" fill="#575757"/>
+<rect x="50.0" y="40.0" width="760.0" height="540.0" fill="#f4f4f4" stroke="#cfcfcf" stroke-width="1"/>
+<text x="780.0" y="78.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">✕</text>
+<rect x="150.0" y="110.0" width="560.0" height="360.0" fill="#cccccc" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="150.0" y1="110.0" x2="710.0" y2="470.0" stroke="#8f8f8f" stroke-width="1"/>
+<line x1="710.0" y1="110.0" x2="150.0" y2="470.0" stroke="#8f8f8f" stroke-width="1"/>
+<text x="110.0" y="300.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="40" font-weight="400" fill="#3a3a3a" text-anchor="start">‹</text>
+<text x="750.0" y="300.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="40" font-weight="400" fill="#3a3a3a" text-anchor="end">›</text>
+<text x="430.0" y="500.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="middle">3 / 24</text>
+<rect x="90.0" y="524.0" width="76.2" height="56.0" fill="#d2d2d2" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="176.2" y="524.0" width="76.2" height="56.0" fill="#d2d2d2" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="262.5" y="524.0" width="76.2" height="56.0" fill="#d2d2d2" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="348.8" y="524.0" width="76.2" height="56.0" fill="#d2d2d2" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="435.0" y="524.0" width="76.2" height="56.0" fill="#d2d2d2" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="521.2" y="524.0" width="76.2" height="56.0" fill="#d2d2d2" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="607.5" y="524.0" width="76.2" height="56.0" fill="#d2d2d2" stroke="#8f8f8f" stroke-width="1"/>
+<rect x="693.8" y="524.0" width="76.2" height="56.0" fill="#d2d2d2" stroke="#8f8f8f" stroke-width="1"/></svg></div><figcaption>Рисунок 13 – Pop-up «Фотогалерея» (лайтбокс)</figcaption></figure><figure><div class="figbox" style="max-width:120mm;margin:0 auto;"><svg style="width:100%;height:auto;display:block" xmlns="http://www.w3.org/2000/svg" width="760" height="420" viewBox="0 0 760 420"><rect x="0.0" y="0.0" width="760.0" height="420.0" fill="#575757"/>
+<rect x="80.0" y="40.0" width="600.0" height="340.0" fill="#f4f4f4" stroke="#cfcfcf" stroke-width="1"/>
+<text x="650.0" y="78.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="18" font-weight="400" fill="#3a3a3a" text-anchor="end">✕</text>
+<rect x="354.0" y="120.0" width="52.0" height="52.0" fill="none" stroke="#7a7a7a" stroke-width="1"/>
+<line x1="368.0" y1="146.0" x2="378.0" y2="158.0" stroke="#7a7a7a" stroke-width="2"/>
+<line x1="378.0" y1="158.0" x2="396.0" y2="132.0" stroke="#7a7a7a" stroke-width="2"/>
+<text x="380.0" y="215.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="26" font-weight="400" fill="#3a3a3a" text-anchor="middle">Заявка отправлена</text>
+<text x="380.0" y="255.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#6f6f6f" text-anchor="middle">Администрация свяжется по телефону или e-mail</text>
+<rect x="290.0" y="310.0" width="180.0" height="42.0" fill="none" stroke="#b5b5b5" stroke-width="1"/>
+<text x="380.0" y="336.0" font-family="Inter, 'DejaVu Sans', sans-serif" font-size="14" font-weight="400" fill="#3a3a3a" text-anchor="middle">Закрыть</text></svg></div><figcaption>Рисунок 14 – Pop-up «Заявка отправлена»</figcaption></figure><h2>6. Применение принципов гештальта</h2><div class="tcap">Таблица 3 – Где применены принципы гештальт-композиции</div><table>
+<tr><th>Принцип</th><th>Где применён в вайрфрейме</th></tr>
+<tr><td>Близость</td><td>Строка концерта (дата + название + площадка), группы полей формы, колонки подвала</td></tr>
+<tr><td>Общая область</td><td>Карточки продуктов, карточка концерта, форма заявки, модальные окна на затемнённом фоне</td></tr>
+<tr><td>Схожесть</td><td>Одинаковые строки афиши, карточки, ссылки со стрелкой; залитая кнопка — аномалия-акцент</td></tr>
+<tr><td>Замкнутость</td><td>Обрезанная вырезка солистки, лента миниатюр «3 / 24» в галерее</td></tr>
+<tr><td>Симметрия</td><td>Сетки из 3–4 карточек, симметричные колонки подвала и формы</td></tr>
+<tr><td>Продолжение</td><td>Выравнивание по колонкам и строкам, линии-разделители между блоками</td></tr>
+<tr><td>Общая судьба</td><td>Счётчики билетов, аккордеон абонемента, перелистывание лайтбокса</td></tr>
+</table><h2>7. Проверка по требованиям задания</h2><div class="tcap">Таблица 4 – Соответствие требованиям</div><table>
+<tr><th>Требование</th><th>Как выполнено</th></tr>
+<tr><td>Не менее 5 блоков вместе с главным экраном и футером</td><td>✓ 8 блоков: шапка, первый экран, интро, билеты, об оркестре, школам, медиа, подвал</td></tr>
+<tr><td>Доделаны вайрфреймы оставшихся блоков</td><td>✓ Блоки 4–8 (рисунки 3–7) в единой сетке и тональной системе</td></tr>
+<tr><td>Нарисованы всплывающие окна</td><td>✓ 7 окон (рисунки 8–14), совпадают с таблицей 2</td></tr>
+<tr><td>Учтены правила гештальт-композиции</td><td>✓ 7 принципов, применение сведено в таблицу 3</td></tr>
+<tr><td>Серый макет, графика геометрическими фигурами</td><td>✓ Оттенки серого, фото — прямоугольники с крестом</td></tr>
+<tr><td>Единая сетка и тексты как на сайте</td><td>✓ Сетка 12 колонок 1300 px; тексты перенесены из макета</td></tr>
+<tr><td>Работа загружается в формате PDF</td><td>✓ Отчёт оформлен и сохранён в PDF</td></tr>
+</table><h2>8. Вывод</h2><p>Спроектированы вайрфреймы оставшихся блоков лендинга оркестра «Метелица» («Билеты и
+абонементы», «Об оркестре», «Школам и организациям», «Медиа», подвал) и собран полный вайрфрейм
+страницы из восьми блоков в сетке 1920 px (12 колонок, контентная область 1300 px, gutter 24 px).
+Дополнительно выполнены макеты семи всплывающих окон. Композиция блоков построена на принципах
+гештальт-композиции: близость и общая область группируют связанную информацию, схожесть и
+симметрия задают единый ритм карточек и колонок, продолжение ведёт взгляд по странице, а аномалия
+(залитая кнопка) выделяет целевое действие. Работа выполняет требования задания (не менее пяти
+блоков, всплывающие окна, серый вайрфрейм с геометрической графикой) и служит основой для
+адаптации под мобильную версию в практической работе 5.</p></body></html>
