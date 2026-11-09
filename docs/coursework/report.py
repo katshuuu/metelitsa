@@ -1,57 +1,70 @@
 # -*- coding: utf-8 -*-
+"""PR5 report: embed raster PNG wireframes so print-to-PDF never drops figures."""
+import base64
 import os
+from pathlib import Path
 
-SVG = "/tmp/report5/svg"
+PNG = Path("/tmp/report5/png")
 
-def svg(name):
-    s = open(os.path.join(SVG, name), encoding="utf-8").read()
-    return s.replace("<svg ", '<svg style="width:100%;height:auto;display:block" ', 1)
+def img(name, maxw=None, maxh=None, cls="figimg"):
+    data = (PNG / name).read_bytes()
+    b64 = base64.b64encode(data).decode("ascii")
+    styles = ["display:block", "margin:0 auto", "width:auto"]
+    if maxw:
+        styles.append(f"max-width:{maxw}")
+    if maxh:
+        styles.append(f"max-height:{maxh}")
+    styles.append("height:auto")
+    style = ";".join(styles)
+    return f'<img class="{cls}" src="data:image/png;base64,{b64}" alt="{name}" style="{style}"/>'
 
-def fig(name, num, caption, maxw=None):
-    style = f'style="max-width:{maxw};margin:0 auto;"' if maxw else ""
+def fig(name, num, caption, maxw=None, maxh=None):
     return (
-        f'<figure><div class="figbox" {style}>{svg(name)}</div>'
-        f'<figcaption>Рисунок {num} – {caption}</figcaption></figure>'
+        f'<figure>'
+        f'<div class="figbox">{img(name, maxw=maxw, maxh=maxh)}</div>'
+        f'<figcaption>Рисунок {num} – {caption}</figcaption>'
+        f'</figure>'
     )
 
 def compare(desk, mob, num, caption):
     return f'''<figure>
 <div class="compare">
-  <div class="desk figbox">{svg(desk)}</div>
-  <div class="mob figbox">{svg(mob)}</div>
+  <div class="desk figbox">{img(desk, maxw="100%")}</div>
+  <div class="mob figbox">{img(mob, maxw="100%")}</div>
 </div>
 <figcaption>Рисунок {num} – {caption}</figcaption>
 </figure>'''
 
 CSS = """
-@page { size: A4; margin: 20mm 18mm 18mm 25mm; }
+@page { size: A4; margin: 18mm 16mm 16mm 22mm; }
 * { box-sizing: border-box; }
-body { font-family: "Liberation Serif","DejaVu Serif",serif; font-size: 13.5pt; line-height: 1.5;
+body { font-family: "Liberation Serif","DejaVu Serif",serif; font-size: 13pt; line-height: 1.45;
        color:#111; margin:0; text-align: justify; hyphens: auto; }
-h1,h2,h3 { font-weight:700; text-align:left; line-height:1.25; }
-h2 { font-size:15pt; margin:18pt 0 8pt; }
-h3 { font-size:13.5pt; margin:14pt 0 6pt; }
-p { margin:0 0 8pt; }
-ul,ol { margin:0 0 8pt; padding-left: 20pt; }
+h1,h2,h3 { font-weight:700; text-align:left; line-height:1.25; page-break-after: avoid; }
+h2 { font-size:14.5pt; margin:16pt 0 8pt; }
+h3 { font-size:13pt; margin:12pt 0 6pt; }
+p { margin:0 0 7pt; }
+ul,ol { margin:0 0 8pt; padding-left: 18pt; }
 li { margin:2pt 0; }
-figure { margin:12pt 0 14pt; page-break-inside: avoid; text-align:center; }
-.figbox { border:1px solid #d7d7d7; padding:6px; background:#fff; }
-figcaption { font-size:12pt; margin-top:6pt; text-align:center; }
-table { border-collapse: collapse; width:100%; font-size:11.5pt; margin:6pt 0 12pt; page-break-inside: avoid; }
-th,td { border:1px solid #9a9a9a; padding:5pt 7pt; vertical-align:top; text-align:left; line-height:1.35; }
+figure { margin:10pt 0 12pt; page-break-inside: avoid; text-align:center; }
+.figbox { border:1px solid #cfcfcf; padding:6px; background:#fff; }
+figcaption { font-size:11.5pt; margin-top:5pt; text-align:center; }
+table { border-collapse: collapse; width:100%; font-size:11pt; margin:6pt 0 10pt; page-break-inside: avoid; }
+th,td { border:1px solid #9a9a9a; padding:4.5pt 6pt; vertical-align:top; text-align:left; line-height:1.3; }
 th { background:#eee; font-weight:700; }
-.tcap { font-size:12pt; margin:10pt 0 2pt; }
-.title-page { height: 257mm; display:flex; flex-direction:column; text-align:center; page-break-after: always; }
-.tp-top { font-size:12.5pt; line-height:1.4; }
+.tcap { font-size:11.5pt; margin:8pt 0 2pt; }
+.title-page { height: 255mm; display:flex; flex-direction:column; text-align:center; page-break-after: always; }
+.tp-top { font-size:12pt; line-height:1.4; }
 .tp-mid { flex:1; display:flex; flex-direction:column; justify-content:center; gap:4pt; }
 .tp-report { font-size:20pt; font-weight:700; letter-spacing:2pt; margin-top:8pt; }
-.tp-sub { font-size:14.5pt; }
-.tp-disc { font-size:13pt; margin-top:6pt; }
-.tp-right { text-align:right; font-size:13pt; margin-top:26pt; }
-.tp-bottom { font-size:13pt; margin-top:auto; }
-.compare { display:flex; gap:10px; align-items:flex-start; justify-content:center; }
-.compare .desk { flex: 1.7; }
-.compare .mob { flex: 0.7; max-width: 46mm; }
+.tp-sub { font-size:14pt; }
+.tp-disc { font-size:12.5pt; margin-top:6pt; }
+.tp-right { text-align:right; font-size:12.5pt; margin-top:22pt; }
+.tp-bottom { font-size:12.5pt; margin-top:auto; }
+.compare { display:flex; gap:8px; align-items:flex-start; justify-content:center; }
+.compare .desk { flex: 1.7; min-width:0; }
+.compare .mob { flex: 0.75; max-width: 48mm; min-width:0; }
+.note { font-size:11.5pt; color:#333; border-left:2px solid #999; padding-left:10pt; margin:8pt 0 10pt; }
 """
 
 B = []
@@ -83,7 +96,7 @@ a("""
   <div class="tp-bottom">Москва 2026</div>
 </section>""")
 
-a("<h1 style='font-size:16pt;text-align:center'>Практическая работа 5<br>«Вайрфрейм под мобильную версию»</h1>")
+a("<h1 style='font-size:15.5pt;text-align:center'>Практическая работа 5<br>«Вайрфрейм под мобильную версию»</h1>")
 
 a("<h2>1. Цель работы</h2>")
 a("""<p>Разработать адаптивный (мобильный) вайрфрейм лендинга Государственного оркестра русских
@@ -106,12 +119,16 @@ a("""<p>Принципы адаптивной вёрстки из методич
 <li>число колонок уменьшено с 12 до 8; элементы, шедшие в ряд, выстроены вертикально
 (компактность).</li>
 </ul>""")
+a("""<p class="note"><b>О графике вайрфрейма.</b> По требованиям к вайрфрейму (как в ПР3–4 и на
+рисунке 49 методички) фотографии и иллюстрации обозначаются серыми геометрическими
+фигурами — прямоугольниками с крестом. Цветной финальный контент на этом этапе не
+вставляется: вайрфрейм фиксирует структуру, иерархию и размеры, а не визуальный дизайн.</p>""")
 
 a("<h2>3. Параметры мобильного фрейма и сетки</h2>")
 a("""<p>Выбран фрейм iPhone 14 шириной 390 px. Сетка настроена по параметрам рисунка 48 из
 методички: 8 колонок, Type Stretch, Margin 16, Gutter 10. Контентная область —
-358 px, ширина колонки — 36 px. Высота шапки уменьшена до 69 px (как в мобильном
-макете сайта). Полная высота лендинга — ≈ 5430 px (восемь блоков, вертикальная прокрутка).</p>""")
+358 px, ширина колонки — 36 px. Высота шапки — 69 px. Полная высота лендинга —
+≈ 5430 px (восемь блоков, вертикальная прокрутка).</p>""")
 a('<div class="tcap">Таблица 1 – Параметры мобильного вайрфрейма</div>')
 a("""<table>
 <tr><th>Параметр</th><th>Десктоп (ПР3–4)</th><th>Мобильный (ПР5)</th></tr>
@@ -126,14 +143,14 @@ a("""<table>
 <tr><td>Шрифт</td><td>Inter</td><td>Inter</td></tr>
 <tr><td>Tap target</td><td>—</td><td>≥ 44 × 44 px</td></tr>
 </table>""")
-a(fig("m_scheme_grid.svg", 1, "Параметры сетки адаптивной версии: 8 колонок, margin 16, gutter 10", maxw="90mm"))
-a(fig("m_scheme_adapt.svg", 2, "Принцип адаптации: ряд карточек десктопа → вертикальный столбец на мобильном"))
+a(fig("m_scheme_grid.png", 1, "Параметры сетки адаптивной версии: 8 колонок, margin 16, gutter 10", maxw="95mm"))
+a(fig("m_scheme_adapt.png", 2, "Принцип адаптации: ряд карточек десктопа → вертикальный столбец на мобильном", maxw="155mm"))
 
 a("<h2>4. Принципы перестановки элементов</h2>")
 a("""<p>Порядок работы с десктопным вайрфреймом (как в методичке):</p>
 <ol>
 <li>сделать поля меньше — вместо 310 px используются поля 16 px;</li>
-<li>если элемент не помещается — уменьшить его (заголовки, фото, карточки);</li>
+<li>если элемент не помещается — уменьшить его (заголовки, фото-плейсхолдеры, карточки);</li>
 <li>контент перемещается вниз налево: то, что стояло справа на десктопе (карточка
 концерта, форма, текст «Об оркестре»), встаёт под левым блоком;</li>
 <li>элементы уменьшаются, сохраняя пропорции и читаемость.</li>
@@ -146,52 +163,51 @@ a("<h2>5. Мобильный вайрфрейм лендинга</h2>")
 a("""<p>Все восемь блоков десктопной версии перенесены в том же порядке: шапка → первый экран →
 интро и ближайший концерт → билеты и абонементы → об оркестре → школам и организациям →
 медиа → подвал. Тексты, кнопки и точки вызова всплывающих окон сохранены.</p>""")
-a(fig("m_landing_full.svg", 3, "Полный мобильный вайрфрейм лендинга (iPhone 14, 390 px)", maxw="58mm"))
-a(fig("m_phone_frame.svg", 4, "Вайрфрейм в корпусе смартфона (по образцу рисунка 49 методички)", maxw="58mm"))
+a(fig("m_landing_full.png", 3, "Полный мобильный вайрфрейм лендинга (iPhone 14, 390 px)", maxw="52mm", maxh="230mm"))
+a(fig("m_phone_frame.png", 4, "Вайрфрейм в корпусе смартфона (по образцу рисунка 49 методички)", maxw="52mm", maxh="230mm"))
 
 a("<h3>5.1. Шапка и первый экран</h3>")
-a("""<p>В шапке остаются логотип и кнопка целевого действия через меню: пять пунктов
-навигации свёрнуты в иконку «гамбургер» с зоной нажатия 44 × 44 px. Надпись «Метелица»,
-фото в раме и вырезка солистки сохраняют композицию постера, но масштабированы под
-ширину 390 px. Кнопки «Афиша и билеты» и «Смотреть видео» стоят друг под другом на
-всю ширину контента (высота 48 px). Карточка ближайшего концерта, которая на десктопе
-была справа, перенесена вниз — принцип «вниз налево».</p>""")
-a(fig("m_block_poster.svg", 5, "Мобильный первый экран-постер", maxw="58mm"))
-a(fig("m_block_intro.svg", 6, "Мобильное интро: описание, кнопки, карточка концерта, факты столбцом", maxw="58mm"))
+a("""<p>В шапке остаются логотип и навигация через иконку «гамбургер» с зоной нажатия
+44 × 44 px. Надпись «Метелица», фото-плейсхолдер в раме и вырезка солистки сохраняют
+композицию постера, но масштабированы под ширину 390 px. Кнопки «Афиша и билеты» и
+«Смотреть видео» стоят друг под другом на всю ширину контента (высота 48 px). Карточка
+ближайшего концерта, которая на десктопе была справа, перенесена вниз — принцип
+«вниз налево».</p>""")
+a(fig("m_block_header.png", 5, "Мобильная шапка: логотип и меню 44×44 px", maxw="70mm"))
+a(fig("m_block_poster.png", 6, "Мобильный первый экран-постер с плейсхолдерами фото", maxw="62mm"))
+a(fig("m_block_intro.png", 7, "Мобильное интро: описание, кнопки, карточка концерта, факты столбцом", maxw="62mm"))
 
 a("<h3>5.2. Блок «Билеты и абонементы»</h3>")
 a("""<p>Строки афиши сохраняют структуру «дата — тип — название — площадка — стрелка», но
-занимают всю ширину. Три карточки продуктов («Пушкинская карта», «Школьный абонемент»,
-«Творческая школа»), которые на десктопе шли в ряд из трёх колонок, выстроены
-вертикально — компактность.</p>""")
-a(compare("d_block_tickets.svg", "m_block_tickets.svg", 7,
+занимают всю ширину. Три карточки продуктов, которые на десктопе шли в ряд из трёх
+колонок, выстроены вертикально — компактность.</p>""")
+a(compare("d_block_tickets.png", "m_block_tickets.png", 8,
           "Сравнение блока «Билеты и абонементы»: десктоп (слева) и мобильный (справа)"))
 
 a("<h3>5.3. Блок «Об оркестре»</h3>")
-a("""<p>Двухколоночная раскладка (фото | текст) заменена на вертикальную: фото на всю ширину,
-затем кикер, заголовок, абзац и ссылки. Иерархия и смысл блока не изменились.</p>""")
-a(compare("d_block_about.svg", "m_block_about.svg", 8,
+a("""<p>Двухколоночная раскладка (фото | текст) заменена на вертикальную: плейсхолдер фото
+на всю ширину, затем кикер, заголовок, абзац и ссылки. Иерархия и смысл блока не изменились.</p>""")
+a(compare("d_block_about.png", "m_block_about.png", 9,
           "Сравнение блока «Об оркестре»: десктоп и мобильный"))
 
 a("<h3>5.4. Блок «Школам и организациям»</h3>")
 a("""<p>Текст предложения и ссылки стоят сверху; форма заявки, которая на десктопе занимала
 правые колонки, перенесена вниз и растянута на всю ширину. Поля ввода и кнопка
 «Отправить заявку» имеют высоту не менее 44–48 px.</p>""")
-a(compare("d_block_schools.svg", "m_block_schools.svg", 9,
+a(compare("d_block_schools.png", "m_block_schools.png", 10,
           "Сравнение блока «Школам и организациям»: десктоп и мобильный"))
 
 a("<h3>5.5. Блок «Медиа» и подвал</h3>")
-a("""<p>Четыре фото, шедшие в один ряд, собраны в сетку 2 × 2. В подвале три колонки
-(«Разделы», «Контакты», «Мы в сети») поставлены друг под другом; логотип, учредитель
-и копирайт сохранены.</p>""")
-a(fig("m_block_media.svg", 10, "Мобильный блок «Медиа»: сетка 2×2", maxw="58mm"))
-a(fig("m_block_footer.svg", 11, "Мобильный подвал (контакты)", maxw="58mm"))
+a("""<p>Четыре фото-плейсхолдера, шедшие в один ряд, собраны в сетку 2 × 2. В подвале три
+колонки («Разделы», «Контакты», «Мы в сети») поставлены друг под другом; логотип,
+учредитель и копирайт сохранены.</p>""")
+a(fig("m_block_media.png", 11, "Мобильный блок «Медиа»: сетка 2×2 с плейсхолдерами фото", maxw="62mm"))
+a(fig("m_block_footer.png", 12, "Мобильный подвал (контакты)", maxw="62mm"))
 
 a("<h2>6. Всплывающие окна на мобильном</h2>")
 a("""<p>Все семь окон из практической работы 4 адаптированы под ширину 390 px: модальное окно
-занимает почти всю ширину экрана (поля ~12 px), затемнение фона сохранено. Счётчики
-билетов, кнопки и поле закрытия имеют размер не менее 44 px. Точки вызова окон те же,
-что на десктопе.</p>""")
+занимает почти всю ширину экрана, затемнение фона сохранено. Счётчики билетов, кнопки
+и поле закрытия имеют размер не менее 44 px. Точки вызова окон те же, что на десктопе.</p>""")
 a('<div class="tcap">Таблица 2 – Мобильные всплывающие окна</div>')
 a("""<table>
 <tr><th>Окно</th><th>Адаптация</th></tr>
@@ -199,8 +215,8 @@ a("""<table>
 <tr><td>«Билет оформлен»</td><td>Компактное подтверждение с кнопкой «Добавить в календарь»</td></tr>
 <tr><td>«Пушкинская карта»</td><td>Шаги 01–03 вертикально; CTA на всю ширину</td></tr>
 <tr><td>«Школьный абонемент»</td><td>Список программ в один столбец; «Оставить заявку»</td></tr>
-<tr><td>«Видеоплеер»</td><td>Плеер 16:9 на ширину экрана</td></tr>
-<tr><td>«Фотогалерея»</td><td>Лайтбокс со стрелками и лентой миниатюр</td></tr>
+<tr><td>«Видеоплеер»</td><td>Плеер 16:9 на ширину экрана (плейсхолдер кадра)</td></tr>
+<tr><td>«Фотогалерея»</td><td>Лайтбокс со стрелками и лентой миниатюр-плейсхолдеров</td></tr>
 <tr><td>«Заявка отправлена»</td><td>Подтверждение отправки формы</td></tr>
 </table>""")
 
@@ -210,7 +226,7 @@ caps = [
     "«Заявка отправлена»",
 ]
 for i, cap in enumerate(caps, 1):
-    a(fig(f"m_popup_{i}.svg", 11 + i, f"Мобильный pop-up {cap}", maxw="58mm"))
+    a(fig(f"m_popup_{i}.png", 12 + i, f"Мобильный pop-up {cap}", maxw="58mm"))
 
 a("<h2>7. Проверка по требованиям задания</h2>")
 a('<div class="tcap">Таблица 3 – Соответствие требованиям практической работы 5</div>')
@@ -218,14 +234,15 @@ a("""<table>
 <tr><th>Требование</th><th>Как выполнено</th></tr>
 <tr><td>Фрейм iPhone 14</td><td>✓ Ширина 390 px</td></tr>
 <tr><td>Сетка: 8 колонок, margin 16, gutter 10</td><td>✓ Рисунок 1; таблица 1</td></tr>
-<tr><td>Поля меньше, элементы меньше</td><td>✓ Margin 16 вместо 310; уменьшены фото, заголовки, карточки</td></tr>
+<tr><td>Поля меньше, элементы меньше</td><td>✓ Margin 16 вместо 310; уменьшены фото-плейсхолдеры, заголовки, карточки</td></tr>
 <tr><td>Контент вниз налево</td><td>✓ Карточка концерта, форма, текст «Об оркестре» перенесены под левый блок</td></tr>
 <tr><td>Контент не удалён</td><td>✓ Все 8 блоков и 7 окон сохранены</td></tr>
 <tr><td>Дизайн не меняется</td><td>✓ Серый вайрфрейм, Inter, геометрическая графика</td></tr>
 <tr><td>Иерархия сохранена</td><td>✓ Тот же порядок блоков и целевые действия</td></tr>
 <tr><td>Tap target ≥ 44 px</td><td>✓ Кнопки 44–48 px, иконка меню 44 × 44</td></tr>
 <tr><td>Компактность (ряд → столбец)</td><td>✓ Карточки, факты, медиа 2×2, колонки подвала</td></tr>
-<tr><td>Загрузка в PDF</td><td>✓ Отчёт оформлен и сохранён в PDF</td></tr>
+<tr><td>Графика — геометрическими фигурами</td><td>✓ Прямоугольники с крестом вместо фото (как на рис. 49 методички)</td></tr>
+<tr><td>Загрузка в PDF</td><td>✓ Отчёт оформлен и сохранён в PDF; все рисунки встроены как растровые изображения</td></tr>
 </table>""")
 
 a("<h2>8. Вывод</h2>")
@@ -233,13 +250,15 @@ a("""<p>На основе десктопного вайрфрейма ленди
 версия для фрейма iPhone 14 (390 px) с сеткой 8 колонок, полями 16 px и gutter 10 px.
 Все восемь блоков и семь всплывающих окон перенесены без потери контента и иерархии:
 элементы уменьшены, сдвинуты вниз налево и выстроены компактно в один столбец.
-Кликабельные элементы соответствуют требованию ≥ 44 px. Работа выполняет условия
-практической работы 5 и готовит основу для финального визуального дизайна десктопной
-и мобильной версий.</p>""")
+Фотографии на этапе вайрфрейма обозначены серыми плейсхолдерами — по правилам серого
+макета и примеру рисунка 49. Кликабельные элементы соответствуют требованию ≥ 44 px.
+Работа выполняет условия практической работы 5 и готовит основу для финального
+визуального дизайна.</p>""")
 
 html = (
     "<!doctype html><html lang='ru'><head><meta charset='utf-8'>"
     f"<style>{CSS}</style></head><body>{''.join(B)}</body></html>"
 )
-open("/tmp/report5/report.html", "w", encoding="utf-8").write(html)
-print("report.html bytes:", len(html))
+out = Path("/tmp/report5/report.html")
+out.write_text(html, encoding="utf-8")
+print("report.html bytes:", out.stat().st_size)
