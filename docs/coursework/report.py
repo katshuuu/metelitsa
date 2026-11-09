@@ -1,119 +1,113 @@
 # -*- coding: utf-8 -*-
-import os
-SVG = "/tmp/report4/svg"
+"""PR4 report: embed raster PNG wireframes so print-to-PDF never drops figures."""
+import base64
+from pathlib import Path
 
-def svg(name):
-    s = open(os.path.join(SVG, name), encoding="utf-8").read()
-    # make responsive to container width
-    return s.replace("<svg ", '<svg style="width:100%;height:auto;display:block" ', 1)
+PNG = Path("/tmp/report4/png")
+FONT_DIR = Path("/tmp/report4/fonts")
 
-def fig(name, num, caption, maxw=None):
-    style = f'style="max-width:{maxw};margin:0 auto;"' if maxw else ""
-    box = f'<div class="figbox" {style}>{svg(name)}</div>'
-    return f'<figure>{box}<figcaption>Рисунок {num} – {caption}</figcaption></figure>'
+def img(name, maxw=None, maxh=None, cls="figimg"):
+    data = (PNG / name).read_bytes()
+    b64 = base64.b64encode(data).decode("ascii")
+    styles = ["display:block", "margin:0 auto", "width:auto"]
+    if maxw:
+        styles.append(f"max-width:{maxw}")
+    if maxh:
+        styles.append(f"max-height:{maxh}")
+    styles.append("height:auto")
+    style = ";".join(styles)
+    return f'<img class="{cls}" src="data:image/png;base64,{b64}" alt="{name}" style="{style}"/>'
 
-# grid schematic (frame params)
-def grid_scheme():
-    from wf import S, wrap_svg, FRAME_W, MARGIN, CONTENT_W, GUTTER, COL_W, colx
-    s = S()
-    W, H = FRAME_W, 360
-    s.rect(0, 0, W, H, "#ededed", stroke="#c4c4c4")
-    s.rect(0, 0, W, 120, "#3c3c3c")  # header
-    s.text(MARGIN, 70, "header 120 px", size=20, fill="#e0e0e0")
-    # margins
-    s.rect(0, 120, MARGIN, H - 120, "#dadada")
-    s.rect(W - MARGIN, 120, MARGIN, H - 120, "#dadada")
-    s.text(MARGIN / 2, 250, "поле\n310", size=18, fill="#6f6f6f", anchor="middle")
-    s.text(W - MARGIN / 2, 250, "поле\n310", size=18, fill="#6f6f6f", anchor="middle")
-    # 12 columns
-    for i in range(12):
-        x = colx(i)
-        s.rect(x, 160, COL_W, 150, "#cfcfcf", stroke="#b5b5b5")
-    s.text(MARGIN, 340, "12 колонок · контентная область 1300 px · gutter 24 px · колонка ≈ 86 px", size=18, fill="#555")
-    s.text(W / 2, 150, "1920 px", size=18, fill="#555", anchor="middle")
-    return wrap_svg(s.dump(), W, H)
+def fig(name, num, caption, maxw=None, maxh=None):
+    return (
+        f'<figure>'
+        f'<div class="figbox">{img(name, maxw=maxw, maxh=maxh)}</div>'
+        f'<figcaption>Рисунок {num} – {caption}</figcaption>'
+        f'</figure>'
+    )
 
-os.makedirs(SVG, exist_ok=True)
-open(os.path.join(SVG, "scheme_grid.svg"), "w", encoding="utf-8").write(grid_scheme())
+def _font_face(path, weight, style):
+    data = Path(path).read_bytes()
+    b64 = base64.b64encode(data).decode("ascii")
+    return f"""@font-face {{
+  font-family: "Times New Roman";
+  src: url("data:font/ttf;base64,{b64}") format("truetype");
+  font-weight: {weight};
+  font-style: {style};
+}}"""
 
-CSS = """
-@page { size: A4; margin: 20mm 18mm 18mm 25mm; }
+CSS = "\n".join([
+    _font_face(FONT_DIR / "TimesNewRoman.ttf", 400, "normal"),
+    _font_face(FONT_DIR / "TimesNewRomanBold.ttf", 700, "normal"),
+    _font_face(FONT_DIR / "TimesNewRomanItalic.ttf", 400, "italic"),
+    _font_face(FONT_DIR / "TimesNewRomanBoldItalic.ttf", 700, "italic"),
+    """
+@page { size: A4; margin: 18mm 16mm 16mm 22mm; }
 * { box-sizing: border-box; }
-body { font-family: "Liberation Serif","DejaVu Serif",serif; font-size: 13.5pt; line-height: 1.5;
+body { font-family: "Times New Roman", Times, serif; font-size: 13pt; line-height: 1.45;
        color:#111; margin:0; text-align: justify; hyphens: auto; }
-h1,h2,h3 { font-weight:700; text-align:left; line-height:1.25; }
-h2 { font-size:15pt; margin:18pt 0 8pt; }
-h3 { font-size:13.5pt; margin:14pt 0 6pt; }
-p { margin:0 0 8pt; }
-ul,ol { margin:0 0 8pt; padding-left: 20pt; }
+h1,h2,h3 { font-family: "Times New Roman", Times, serif; font-weight:700; text-align:left; line-height:1.25; page-break-after: avoid; }
+h2 { font-size:14.5pt; margin:16pt 0 8pt; }
+h3 { font-size:13pt; margin:12pt 0 6pt; }
+p { margin:0 0 7pt; }
+ul,ol { margin:0 0 8pt; padding-left: 18pt; }
 li { margin:2pt 0; }
-figure { margin:12pt 0 14pt; page-break-inside: avoid; text-align:center; }
-.figbox { border:1px solid #d7d7d7; padding:6px; background:#fff; }
-figcaption { font-size:12pt; margin-top:6pt; text-align:center; }
-table { border-collapse: collapse; width:100%; font-size:11.5pt; margin:6pt 0 12pt; page-break-inside: avoid; }
-th,td { border:1px solid #9a9a9a; padding:5pt 7pt; vertical-align:top; text-align:left; line-height:1.35; }
+figure { margin:10pt 0 12pt; page-break-inside: avoid; text-align:center; }
+.figbox { border:1px solid #cfcfcf; padding:6px; background:#fff; }
+.figbox img, img.figimg { max-height: 230mm; page-break-inside: avoid; }
+.pagebreak { page-break-before: always; }
+figcaption { font-family: "Times New Roman", Times, serif; font-size:11.5pt; margin-top:5pt; text-align:center; }
+table { border-collapse: collapse; width:100%; font-size:11pt; margin:6pt 0 10pt; page-break-inside: avoid; }
+th,td { border:1px solid #9a9a9a; padding:4.5pt 6pt; vertical-align:top; text-align:left; line-height:1.3; }
 th { background:#eee; font-weight:700; }
-.tcap { font-size:12pt; margin:10pt 0 2pt; }
-.title-page { height: 257mm; display:flex; flex-direction:column; text-align:center; page-break-after: always; }
-.tp-top { font-size:12.5pt; line-height:1.4; }
-.tp-mid { flex:1; display:flex; flex-direction:column; justify-content:center; gap:4pt; }
-.tp-report { font-size:20pt; font-weight:700; letter-spacing:2pt; margin-top:8pt; }
-.tp-sub { font-size:14.5pt; }
-.tp-disc { font-size:13pt; margin-top:6pt; }
-.tp-right { text-align:right; font-size:13pt; margin-top:26pt; }
-.tp-bottom { font-size:13pt; margin-top:auto; }
-.center { text-align:center; }
-.note { font-size:11.5pt; color:#333; }
-"""
+.tcap { font-size:11.5pt; margin:8pt 0 2pt; }
+.title-page {
+  width: 100%;
+  height: 261mm;
+  margin: 0;
+  padding: 0;
+  page-break-after: always;
+  overflow: hidden;
+}
+.title-page img {
+  display: block;
+  width: 210mm;
+  height: 297mm;
+  max-width: none;
+  margin: -18mm -16mm -16mm -22mm;
+  object-fit: fill;
+}
+.note { font-size:11.5pt; color:#333; border-left:2px solid #999; padding-left:10pt; margin:8pt 0 10pt; }
+.pair { display:flex; gap:10px; align-items:flex-start; justify-content:center; }
+.pair .a, .pair .b { flex:1; min-width:0; }
+""",
+])
 
-def title_page():
-    return f'''
+B = []
+a = B.append
+
+# Title page placeholder — replaced by official PDF page after Chrome print
+a(f"""
 <section class="title-page">
-  <div class="tp-top">
-    МИНОБРНАУКИ РОССИИ<br>
-    Федеральное государственное бюджетное образовательное учреждение высшего образования<br>
-    «МИРЭА – Российский технологический университет»<br>
-    РТУ МИРЭА<br><br>
-    Институт перспективных технологий и индустриального программирования<br>
-    Кафедра индустриального программирования
-  </div>
-  <div class="tp-mid">
-    <div class="tp-report">ОТЧЁТ</div>
-    <div class="tp-sub">по практическому заданию № 4</div>
-    <div class="tp-sub">«Вайрфрейм остальных блоков»</div>
-    <div class="tp-disc">по дисциплине «Компьютерный дизайн»</div>
-    <br>
-    <div class="tp-disc">НАПРАВЛЕНИЕ ПОДГОТОВКИ<br>09.03.02 «Информационные системы и технологии»</div>
-    <div class="tp-right">
-      Выполнила:<br>
-      Студентка группы ЭФБО-01-24<br>
-      Шусталова Е.М.
-    </div>
-  </div>
-  <div class="tp-bottom">Москва 2026</div>
-</section>'''
+  {img('title_page.png', maxw='210mm', cls='titleimg')}
+</section>""")
 
-BODY = []
-def add(x): BODY.append(x)
+a("<h1 style='font-size:15.5pt;text-align:center'>Практическая работа 4<br>«Вайрфрейм остальных блоков»</h1>")
 
-add(title_page())
-
-add("<h1 style='font-size:16pt;text-align:center'>Практическая работа 4<br>«Вайрфрейм остальных блоков»</h1>")
-
-add("<h2>1. Цель работы</h2>")
-add("""<p>Разработать вайрфреймы остальных блоков одностраничного лендинга Государственного
+a("<h2>1. Цель работы</h2>")
+a("""<p>Разработать вайрфреймы остальных блоков одностраничного лендинга Государственного
 оркестра русских народных инструментов «Метелица» и макеты всплывающих окон, применив
 принципы гештальт-композиции для группировки и визуальной иерархии элементов. Работа
 продолжает практическую работу 3, в которой построена информационная архитектура лендинга
 и выполнен вайрфрейм первого блока (шапка, первый экран-постер, интро с ближайшим концертом
 и факты).</p>""")
 
-add("<h2>2. Исходные данные</h2>")
-add("""<p>В основе работы — реализованный в Figma макет лендинга и информационная архитектура из
+a("<h2>2. Исходные данные</h2>")
+a("""<p>В основе работы — реализованный в Figma макет лендинга и информационная архитектура из
 практической работы 3: одностраничный сайт из восьми последовательных блоков. Первый блок
 (блоки 1–3 архитектуры: шапка, первый экран, интро и факты) уже спроектирован. В настоящей
 работе проектируются оставшиеся блоки и все всплывающие окна:</p>""")
-add("""<ul>
+a("""<ul>
 <li>блок 4 — «Билеты и абонементы»: список ближайших концертов и карточки продуктов;</li>
 <li>блок 5 — «Об оркестре»: доверие к коллективу, цитата художественного руководителя;</li>
 <li>блок 6 — «Школам и организациям»: второе целевое действие — форма заявки;</li>
@@ -121,15 +115,15 @@ add("""<ul>
 <li>блок 8 — подвал (контакты): обязательная информация госучреждения;</li>
 <li>семь всплывающих окон, которые открываются из элементов блоков.</li>
 </ul>""")
-add("""<p>Вместе с первым блоком лендинг состоит из восьми блоков (больше требуемых пяти). Параметры
+a("""<p>Вместе с первым блоком лендинг состоит из восьми блоков (больше требуемых пяти). Параметры
 фрейма и модульной сетки сохранены из практической работы 3 (таблица 1): фрейм 1920 px, 12 колонок,
 контентная область 1300 px, gutter 24 px, поля 310 px. Цвет макета заменён оттенками серого
 (#262626 – #F4F4F4): фирменный тёмно-синий #030A3C показан тёмно-серым, белый и mist —
 светло-серыми тонами. Фотографии обозначены прямоугольниками с крестом, эмблема и орнамент —
 простыми фигурами, шрифт вайрфрейма — Inter; тексты перенесены из реализованного макета.</p>""")
 
-add('<div class="tcap">Таблица 1 – Параметры фрейма и сетки</div>')
-add("""<table>
+a('<div class="tcap">Таблица 1 – Параметры фрейма и сетки</div>')
+a("""<table>
 <tr><th>Параметр</th><th>Значение</th><th>Требование задания</th></tr>
 <tr><td>Ширина фрейма</td><td>1920 px (реализованный макет — 1440 px)</td><td>1920 px</td></tr>
 <tr><td>Сетка (Layout grid)</td><td>12 колонок, Stretch, Margin 310, Gutter 24 (колонка ≈ 86 px)</td><td>12 колонок</td></tr>
@@ -140,13 +134,13 @@ add("""<table>
 <tr><td>Графика</td><td>Прямоугольники с крестом — фото; простые фигуры — эмблема и орнамент</td><td>Геометрические фигуры</td></tr>
 <tr><td>Шрифт</td><td>Inter — нейтральный шрифт вайрфрейма</td><td>—</td></tr>
 </table>""")
-add(fig("scheme_grid.svg", 1, "Параметры фрейма: сетка 12 колонок, поля, gutter, высота header"))
+a(fig("scheme_grid.png", 1, "Параметры фрейма: сетка 12 колонок, поля, gutter, высота header"))
 
-add("<h2>3. Принципы гештальт-композиции</h2>")
-add("""<p>Гештальт-принципы описывают, как человек воспринимает группу визуальных элементов как единое
+a("<h2>3. Принципы гештальт-композиции</h2>")
+a("""<p>Гештальт-принципы описывают, как человек воспринимает группу визуальных элементов как единое
 целое. При проектировании оставшихся блоков использованы следующие принципы, применимые к
 интерфейсам.</p>""")
-add("""<ul>
+a("""<ul>
 <li><b>Близость.</b> Элементы, расположенные рядом, воспринимаются как группа. Белое пространство
 отделяет группы друг от друга и задаёт направление взгляда.</li>
 <li><b>Общая область.</b> Элементы в пределах одной области (карточки, формы) воспринимаются связанными;
@@ -163,63 +157,76 @@ add("""<ul>
 аккордеон, лайтбокс) воспринимаются связанными — это заложено в поведение всплывающих окон.</li>
 </ul>""")
 
-add("<h2>4. Вайрфреймы остальных блоков</h2>")
-add("""<p>Все блоки выполнены в единой сетке и тональной системе. Расстояния подчинены системе из трёх
+a("<h2>4. Вайрфреймы остальных блоков</h2>")
+a("""<p>Все блоки выполнены в единой сетке и тональной системе. Расстояния подчинены системе из трёх
 величин (как в практической работе 3): внутри группы — около 36 px, между группами — около 48 px,
 между частями блока — 96–160 px. Благодаря этому элементы читаются группами (принцип близости), а
 смена тона фона отделяет блоки друг от друга (общая область, продолжение).</p>""")
-add(fig("landing_full.svg", 2, "Полный вайрфрейм лендинга: восемь блоков в сетке 1920 px", maxw="78mm"))
+a("""<p class="note"><b>О композиции работы.</b> По образцу из методички (рисунок с лендингом и
+всплывающими окнами рядом) полный вайрфрейм показан целиком: слева — восемь блоков лендинга,
+справа — примеры модальных окон. Детальные фрагменты блоков и все семь pop-up’ов приведены ниже.</p>""")
+a(fig("overview_composition.png", 2,
+      "Общий вид работы (по образцу методички): полный вайрфрейм лендинга (8 блоков) и всплывающие окна",
+      maxw="165mm", maxh="230mm"))
+a('<div class="pagebreak"></div>')
+a(fig("landing_full.png", 3, "Полный вайрфрейм лендинга: восемь блоков в сетке 1920 px",
+      maxw="72mm", maxh="230mm"))
+a('<div class="pagebreak"></div>')
 
-add("<h3>4.1. Блок «Билеты и абонементы»</h3>")
-add("""<p>Главный блок покупки. «Ближайшие концерты» — список строк одинакового строения: крупная дата,
+a("<h3>4.1. Блок «Билеты и абонементы»</h3>")
+a("""<p>Главный блок покупки. «Ближайшие концерты» — список строк одинакового строения: крупная дата,
 тип и название, площадка, стрелка. Одинаковое оформление строк (<b>схожесть</b>) и выравнивание по
 колонкам (<b>продолжение</b>) позволяют быстро сканировать афишу; тонкие линии-разделители и равные
 отступы объединяют строку в группу (<b>близость</b>). Ниже — три карточки продуктов («Пушкинская
 карта», «Школьный абонемент», «Творческая школа») в прямоугольных областях с рамкой — пример
 принципа <b>общей области</b>. Каждая карточка открывает своё всплывающее окно.</p>""")
-add(fig("block_tickets.svg", 3, "Блок «Билеты и абонементы»"))
+a(fig("block_tickets.png", 4, "Блок «Билеты и абонементы»"))
 
-add("<h3>4.2. Блок «Об оркестре»</h3>")
-add("""<p>Блок доверия. Фотография художественного руководителя слева, текст и цитата справа — текст слева,
+a("<h3>4.2. Блок «Об оркестре»</h3>")
+a("""<p>Блок доверия. Фотография художественного руководителя слева, текст и цитата справа — текст слева,
 акцент справа, как рекомендует методичка. Крупный заголовок, абзац истории и три ссылки со стрелками
 («История оркестра», «Состав», «Игорь Тонин») выровнены по левому краю колонки (<b>продолжение</b>),
 а одинаковое оформление ссылок указывает на их общее назначение (<b>схожесть</b>). Тёмный фон блока
 отделяет его от светлых соседних блоков (<b>общая область</b>).</p>""")
-add(fig("block_about.svg", 4, "Блок «Об оркестре»"))
+a('<div class="pagebreak"></div>')
+a(fig("block_about.png", 5, "Блок «Об оркестре»"))
 
-add("<h3>4.3. Блок «Школам и организациям»</h3>")
-add("""<p>Второе целевое действие — заявка от школы или организации (персона Марина Сергеевна). Слева —
+a("<h3>4.3. Блок «Школам и организациям»</h3>")
+a("""<p>Второе целевое действие — заявка от школы или организации (персона Марина Сергеевна). Слева —
 заголовок и ссылки «Условия абонемента» и «Приглашаем к сотрудничеству»; справа, в единой
 прямоугольной области-карточке, — форма заявки (имя, организация, телефон или e-mail, сообщение,
 согласие, кнопка). Форма собрана в одну <b>общую область</b>, поля с нижней линией одинаковы
 (<b>схожесть</b>) и расположены плотной группой (<b>близость</b>). Залитая кнопка «Отправить заявку» —
 единственный акцент (аномалия в принципе схожести). После отправки открывается окно «Заявка
 отправлена».</p>""")
-add(fig("block_schools.svg", 5, "Блок «Школам и организациям» с формой заявки"))
+a('<div class="pagebreak"></div>')
+a(fig("block_schools.png", 6, "Блок «Школам и организациям» с формой заявки"))
 
-add("<h3>4.4. Блок «Медиа»</h3>")
-add("""<p>Блок «продаёт впечатление» новой аудитории (персона Дмитрий). Заголовок «Слушать и смотреть»
+a("<h3>4.4. Блок «Медиа»</h3>")
+a("""<p>Блок «продаёт впечатление» новой аудитории (персона Дмитрий). Заголовок «Слушать и смотреть»
 и ряд из четырёх фотографий одинакового размера, выстроенных по сетке. Равные размеры и
 расстояния делают галерею единым рядом (<b>схожесть</b>, <b>продолжение</b>), а клик по фото
 открывает лайтбокс. Ссылка «Фотогалерея» ведёт к полной галерее.</p>""")
-add(fig("block_media.svg", 6, "Блок «Медиа»"))
+a('<div class="pagebreak"></div>')
+a(fig("block_media.png", 7, "Блок «Медиа»"))
 
-add("<h3>4.5. Подвал (контакты)</h3>")
-add("""<p>Завершающий блок с обязательной информацией госучреждения. Логотип и описание, колонки
+a("<h3>4.5. Подвал (контакты)</h3>")
+a("""<p>Завершающий блок с обязательной информацией госучреждения. Логотип и описание, колонки
 «Разделы», «Контакты», «Мы в сети», ниже — учредитель и копирайт. Информация сгруппирована по
 колонкам (<b>близость</b>, <b>симметрия</b>): связанные ссылки стоят вместе, несвязанные группы
 разведены пробелами. Тёмный фон и верхняя линия отделяют подвал и завершают <b>продолжение</b>
 страницы.</p>""")
-add(fig("block_footer.svg", 7, "Подвал лендинга (контакты)"))
+a('<div class="pagebreak"></div>')
+a(fig("block_footer.png", 8, "Подвал лендинга (контакты)"))
 
-add("<h2>5. Всплывающие окна</h2>")
-add("""<p>Окна повторяют интерфейсный стиль макета: прямые углы, тонкие обводки, поля ввода с нижней
+a("<h2>5. Всплывающие окна</h2>")
+a("""<p>Окна повторяют интерфейсный стиль макета: прямые углы, тонкие обводки, поля ввода с нижней
 линией, подчёркнутые ссылки со стрелкой. Модальные окна занимают 6 центральных колонок сетки
 (≈ 638 px), медиа-окна (видео, галерея) шире — 10 колонок. Страница под окном затемняется; окно
 закрывается крестиком, кликом вне окна или клавишей Esc. Затемнение фона и вынос окна на передний
 план — применение принципов <b>общей области</b> и <b>фигуры/фона</b>.</p>""")
-add('<div class="tcap">Таблица 2 – Всплывающие окна и точки вызова</div>')
-add("""<table>
+a('<div class="tcap">Таблица 2 – Всплывающие окна и точки вызова</div>')
+a("""<table>
 <tr><th>Окно</th><th>Откуда открывается</th></tr>
 <tr><td>«Покупка билета»</td><td>«Купить билет» в шапке, «Подробнее и билеты» на карточке концерта, «Подробнее» в списке концертов</td></tr>
 <tr><td>«Билет оформлен»</td><td>Возврат с платёжной страницы после успешной оплаты</td></tr>
@@ -241,11 +248,12 @@ pop_caps = [
 ]
 for i, cap in enumerate(pop_caps, 1):
     mw = "150mm" if i in (5, 6) else "120mm"
-    add(fig(f"popup_{i}.svg", 7 + i, cap, maxw=mw))
+    a('<div class="pagebreak"></div>' if i==1 else '')
+    a(fig(f"popup_{i}.png", 8 + i, cap, maxw=mw))
 
-add("<h2>6. Применение принципов гештальта</h2>")
-add('<div class="tcap">Таблица 3 – Где применены принципы гештальт-композиции</div>')
-add("""<table>
+a("<h2>6. Применение принципов гештальта</h2>")
+a('<div class="tcap">Таблица 3 – Где применены принципы гештальт-композиции</div>')
+a("""<table>
 <tr><th>Принцип</th><th>Где применён в вайрфрейме</th></tr>
 <tr><td>Близость</td><td>Строка концерта (дата + название + площадка), группы полей формы, колонки подвала</td></tr>
 <tr><td>Общая область</td><td>Карточки продуктов, карточка концерта, форма заявки, модальные окна на затемнённом фоне</td></tr>
@@ -256,21 +264,21 @@ add("""<table>
 <tr><td>Общая судьба</td><td>Счётчики билетов, аккордеон абонемента, перелистывание лайтбокса</td></tr>
 </table>""")
 
-add("<h2>7. Проверка по требованиям задания</h2>")
-add('<div class="tcap">Таблица 4 – Соответствие требованиям</div>')
-add("""<table>
+a("<h2>7. Проверка по требованиям задания</h2>")
+a('<div class="tcap">Таблица 4 – Соответствие требованиям</div>')
+a("""<table>
 <tr><th>Требование</th><th>Как выполнено</th></tr>
 <tr><td>Не менее 5 блоков вместе с главным экраном и футером</td><td>✓ 8 блоков: шапка, первый экран, интро, билеты, об оркестре, школам, медиа, подвал</td></tr>
-<tr><td>Доделаны вайрфреймы оставшихся блоков</td><td>✓ Блоки 4–8 (рисунки 3–7) в единой сетке и тональной системе</td></tr>
-<tr><td>Нарисованы всплывающие окна</td><td>✓ 7 окон (рисунки 8–14), совпадают с таблицей 2</td></tr>
+<tr><td>Доделаны вайрфреймы оставшихся блоков</td><td>✓ Блоки 4–8 (рисунки 4–8) в единой сетке и тональной системе</td></tr>
+<tr><td>Нарисованы всплывающие окна</td><td>✓ 7 окон (рисунки 9–15), совпадают с таблицей 2</td></tr>
 <tr><td>Учтены правила гештальт-композиции</td><td>✓ 7 принципов, применение сведено в таблицу 3</td></tr>
 <tr><td>Серый макет, графика геометрическими фигурами</td><td>✓ Оттенки серого, фото — прямоугольники с крестом</td></tr>
 <tr><td>Единая сетка и тексты как на сайте</td><td>✓ Сетка 12 колонок 1300 px; тексты перенесены из макета</td></tr>
 <tr><td>Работа загружается в формате PDF</td><td>✓ Отчёт оформлен и сохранён в PDF</td></tr>
 </table>""")
 
-add("<h2>8. Вывод</h2>")
-add("""<p>Спроектированы вайрфреймы оставшихся блоков лендинга оркестра «Метелица» («Билеты и
+a("<h2>8. Вывод</h2>")
+a("""<p>Спроектированы вайрфреймы оставшихся блоков лендинга оркестра «Метелица» («Билеты и
 абонементы», «Об оркестре», «Школам и организациям», «Медиа», подвал) и собран полный вайрфрейм
 страницы из восьми блоков в сетке 1920 px (12 колонок, контентная область 1300 px, gutter 24 px).
 Дополнительно выполнены макеты семи всплывающих окон. Композиция блоков построена на принципах
@@ -280,6 +288,6 @@ add("""<p>Спроектированы вайрфреймы оставшихся
 блоков, всплывающие окна, серый вайрфрейм с геометрической графикой) и служит основой для
 адаптации под мобильную версию в практической работе 5.</p>""")
 
-html = f"<!doctype html><html lang='ru'><head><meta charset='utf-8'><style>{CSS}</style></head><body>{''.join(BODY)}</body></html>"
-open("/tmp/report4/report.html", "w", encoding="utf-8").write(html)
+html = f"<!doctype html><html lang='ru'><head><meta charset='utf-8'><style>{CSS}</style></head><body>{''.join(B)}</body></html>"
+Path("/tmp/report4/report.html").write_text(html, encoding="utf-8")
 print("report.html bytes:", len(html))
