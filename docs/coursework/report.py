@@ -70,14 +70,22 @@ table { border-collapse: collapse; width:100%; font-size:11pt; margin:6pt 0 10pt
 th,td { border:1px solid #9a9a9a; padding:4.5pt 6pt; vertical-align:top; text-align:left; line-height:1.3; }
 th { background:#eee; font-weight:700; }
 .tcap { font-size:11.5pt; margin:8pt 0 2pt; }
-.title-page { height: 255mm; display:flex; flex-direction:column; text-align:center; page-break-after: always; }
-.tp-top { font-size:12pt; line-height:1.4; }
-.tp-mid { flex:1; display:flex; flex-direction:column; justify-content:center; gap:4pt; }
-.tp-report { font-size:20pt; font-weight:700; letter-spacing:2pt; margin-top:8pt; }
-.tp-sub { font-size:14pt; }
-.tp-disc { font-size:12.5pt; margin-top:6pt; }
-.tp-right { text-align:right; font-size:12.5pt; margin-top:22pt; }
-.tp-bottom { font-size:12.5pt; margin-top:auto; }
+.title-page {
+  width: 100%;
+  height: 261mm;
+  margin: 0;
+  padding: 0;
+  page-break-after: always;
+  overflow: hidden;
+}
+.title-page img {
+  display: block;
+  width: 210mm;
+  height: 297mm;
+  max-width: none;
+  margin: -18mm -16mm -16mm -22mm; /* cancel @page margins for full-bleed title */
+  object-fit: fill;
+}
 .compare { display:flex; gap:8px; align-items:flex-start; justify-content:center; }
 .compare .desk { flex: 1.7; min-width:0; }
 .compare .mob { flex: 0.75; max-width: 48mm; min-width:0; }
@@ -88,30 +96,9 @@ th { background:#eee; font-weight:700; }
 B = []
 a = B.append
 
-a("""
+a(f"""
 <section class="title-page">
-  <div class="tp-top">
-    МИНОБРНАУКИ РОССИИ<br>
-    Федеральное государственное бюджетное образовательное учреждение высшего образования<br>
-    «МИРЭА – Российский технологический университет»<br>
-    РТУ МИРЭА<br><br>
-    Институт перспективных технологий и индустриального программирования<br>
-    Кафедра индустриального программирования
-  </div>
-  <div class="tp-mid">
-    <div class="tp-report">ОТЧЁТ</div>
-    <div class="tp-sub">по практическому заданию № 5</div>
-    <div class="tp-sub">«Вайрфрейм под мобильную версию»</div>
-    <div class="tp-disc">по дисциплине «Компьютерный дизайн»</div>
-    <br>
-    <div class="tp-disc">НАПРАВЛЕНИЕ ПОДГОТОВКИ<br>09.03.02 «Информационные системы и технологии»</div>
-    <div class="tp-right">
-      Выполнила:<br>
-      Студентка группы ЭФБО-01-24<br>
-      Шусталова Е.М.
-    </div>
-  </div>
-  <div class="tp-bottom">Москва 2026</div>
+  {img('title_page.png', maxw='210mm', cls='titleimg')}
 </section>""")
 
 a("<h1 style='font-size:15.5pt;text-align:center'>Практическая работа 5<br>«Вайрфрейм под мобильную версию»</h1>")
