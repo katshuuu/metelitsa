@@ -35,12 +35,29 @@ def compare(desk, mob, num, caption):
 <figcaption>Рисунок {num} – {caption}</figcaption>
 </figure>'''
 
-CSS = """
+FONT_DIR = "/tmp/report5/fonts"
+
+def _font_face(path, weight, style):
+    data = Path(path).read_bytes()
+    b64 = base64.b64encode(data).decode("ascii")
+    return f"""@font-face {{
+  font-family: "Times New Roman";
+  src: url("data:font/ttf;base64,{b64}") format("truetype");
+  font-weight: {weight};
+  font-style: {style};
+}}"""
+
+CSS = "\n".join([
+    _font_face(f"{FONT_DIR}/TimesNewRoman.ttf", 400, "normal"),
+    _font_face(f"{FONT_DIR}/TimesNewRomanBold.ttf", 700, "normal"),
+    _font_face(f"{FONT_DIR}/TimesNewRomanItalic.ttf", 400, "italic"),
+    _font_face(f"{FONT_DIR}/TimesNewRomanBoldItalic.ttf", 700, "italic"),
+    """
 @page { size: A4; margin: 18mm 16mm 16mm 22mm; }
 * { box-sizing: border-box; }
-body { font-family: "Liberation Serif","DejaVu Serif",serif; font-size: 13pt; line-height: 1.45;
+body { font-family: "Times New Roman", Times, serif; font-size: 13pt; line-height: 1.45;
        color:#111; margin:0; text-align: justify; hyphens: auto; }
-h1,h2,h3 { font-weight:700; text-align:left; line-height:1.25; page-break-after: avoid; }
+h1,h2,h3 { font-family: "Times New Roman", Times, serif; font-weight:700; text-align:left; line-height:1.25; page-break-after: avoid; }
 h2 { font-size:14.5pt; margin:16pt 0 8pt; }
 h3 { font-size:13pt; margin:12pt 0 6pt; }
 p { margin:0 0 7pt; }
@@ -48,7 +65,7 @@ ul,ol { margin:0 0 8pt; padding-left: 18pt; }
 li { margin:2pt 0; }
 figure { margin:10pt 0 12pt; page-break-inside: avoid; text-align:center; }
 .figbox { border:1px solid #cfcfcf; padding:6px; background:#fff; }
-figcaption { font-size:11.5pt; margin-top:5pt; text-align:center; }
+figcaption { font-family: "Times New Roman", Times, serif; font-size:11.5pt; margin-top:5pt; text-align:center; }
 table { border-collapse: collapse; width:100%; font-size:11pt; margin:6pt 0 10pt; page-break-inside: avoid; }
 th,td { border:1px solid #9a9a9a; padding:4.5pt 6pt; vertical-align:top; text-align:left; line-height:1.3; }
 th { background:#eee; font-weight:700; }
@@ -65,7 +82,8 @@ th { background:#eee; font-weight:700; }
 .compare .desk { flex: 1.7; min-width:0; }
 .compare .mob { flex: 0.75; max-width: 48mm; min-width:0; }
 .note { font-size:11.5pt; color:#333; border-left:2px solid #999; padding-left:10pt; margin:8pt 0 10pt; }
-"""
+""",
+])
 
 B = []
 a = B.append
