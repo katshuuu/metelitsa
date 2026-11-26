@@ -1,0 +1,10 @@
+NAMU 1850
+Designer: Dmitry Rastvortsev (rastvor.com.ua)
+Created for the National Art Museum of Ukraine with Banda Agency.
+License: Creative Commons Attribution-NoDerivatives 4.0 International (CC BY-ND 4.0)
+https://creativecommons.org/licenses/by-nd/4.0/
+
+The font file must not be modified or decompiled.
+Attribution: NAMU typeface by Dmitry Rastvortsev.
+
+Project file: public/fonts/NAMU-1850.otf (Regular, weight 400), supplied with the layout sources.
